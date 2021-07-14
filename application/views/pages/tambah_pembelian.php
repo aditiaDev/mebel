@@ -8,59 +8,104 @@
       <div class="row">
         <div class="col-12">
           <div class="card" style="margin-top: 1rem">
-            <div class="card-header">
-              <h3 class="card-title">Tambah Pembelian</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <div class="row">
-                <div class="col-xs-12 col-lg-12">
-                  <table class="table tb_no_top">
-                    <tr>
-                        <td>ID Pembelian</td>
-                        <td colspan="2"><input type="text" class="form-control" name="id_pembelian" readonly></td>
-                        <td>Tanggal Beli</td>
-                        <td><input type="text" class="form-control datepicker" name="tgl_pembelian" value="<?php echo date('d-M-Y'); ?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Supplier</td>
-                        <td><input type="text" class="form-control" name="id_supplier" readonly></td>
-                        <td><button class="btn btn-default" id="btn_supl"><i class="fas fa-list"></i></button></td>
-                        <td colspan="2"><input type="text" class="form-control" name="nm_supplier" readonly></td>
-                        <td>Status</td>
-                        <td><input type="text" class="form-control" style="text-transform: uppercase;" name="status_pembelian" value="pengajuan" readonly></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5"></td>
-                        <td>Total</td>
-                        <td><input type="text" class="form-control" name="tot_pembelian" readonly></td>
-                    </tr>
-                  </table>
-                </div>
+            <form id="FRM_DATA" method="post">
+              <div class="card-header">
+                <h3 class="card-title">Tambah Pembelian</h3>
               </div>
-
-              <div class="row">
-                <div class="col-xs-12 col-lg-12">
-                  <div style="position: relative;height: 400px;overflow: auto;display: block;">
-                    <table class="table table-bordered" id="tb_data" style="font-size:14px" >
-                      <thead>
-                        <th style="width: 60px;text-align:center;"><button class="btn btn-sm btn-info" id="ADD_DATA"><i class="fas fa-plus"></i></button></th>
-                        <th style="width: 170px;">Kode Barang</th>
-                        <th style="width: 60px;"></th>
-                        <th style="width: 350px;">Deskripsi</th>
-                        <th >Harga</th>
-                        <th >Qty</th>
-                        <th>Sub Total</th>
-                      </thead>
-                      <tbody >
-                          
-                      </tbody>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-xs-12 col-lg-12">
+                    <table class="table tb_no_top">
+                      <tr>
+                          <td>ID Pembelian</td>
+                          <td colspan="2"><input type="text" class="form-control" name="id_pembelian" readonly></td>
+                          <td>Tanggal Beli</td>
+                          <td><input type="text" class="form-control datepicker" name="tgl_pembelian" value="<?php echo date('d-M-Y'); ?>"></td>
+                      </tr>
+                      <tr>
+                          <td>Supplier</td>
+                          <td><input type="text" class="form-control" name="id_supplier" readonly></td>
+                          <td><button class="btn btn-default" type="button" id="btn_supl"><i class="fas fa-list"></i></button></td>
+                          <td colspan="2"><input type="text" class="form-control" name="nm_supplier" readonly></td>
+                          <td>Status</td>
+                          <td><input type="text" class="form-control" style="text-transform: uppercase;" name="status_pembelian" value="pengajuan" readonly></td>
+                      </tr>
+                      <tr>
+                          <td colspan="5"></td>
+                          <td>Total</td>
+                          <td><input type="text" class="form-control" name="tot_pembelian" readonly></td>
+                      </tr>
                     </table>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-12">
+                    <!-- <div class="card card-primary card-outline card-tabs"> -->
+                      <div class="card-header p-0 pt-1 border-bottom-0">
+                        <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                          <li class="nav-item">
+                            <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Items</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Keterangan</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div style="padding-top: 10px;">
+                        <div class="tab-content" id="custom-tabs-three-tabContent">
+                          <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                            <div class="row">
+                              <div class="col-12">
+                                <div style="position: relative;height: 400px;overflow: auto;display: block;">
+                                  <table class="table table-bordered" id="tb_data" style="font-size:14px" >
+                                    <thead>
+                                      <th style="width: 60px;text-align:center;"><button type="button" class="btn btn-sm btn-info" id="ADD_DATA"><i class="fas fa-plus"></i></button></th>
+                                      <th style="width: 170px;">Kode Barang</th>
+                                      <th style="width: 60px;"></th>
+                                      <th style="width: 350px;">Deskripsi</th>
+                                      <th >Harga</th>
+                                      <th >Qty</th>
+                                      <th>Sub Total</th>
+                                    </thead>
+                                    <tbody >
+                                        
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                            <div class="row">
+                              <div class="col-12">
+                                <table class="table tb_no_top" id="tb_ket">
+                                  <thead>
+                                    <th><button type="button" class="btn btn-sm btn-info" id="ADD_KET" style="border-radius: 50%;"><i class="fas fa-plus"></i></button></th>
+                                  </thead>
+                                  <tbody></tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card -->
+                    <!-- </div> -->
+                  </div>
+                </div>
+
+                
               </div>
-            </div>
-            <!-- /.card-body -->
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                  <button class="btn btn-warning"><i class="fas fa-backspace"></i> Cancel</button>
+                  <button type="submit" class="btn btn-info" style="margin-left:10px;"><i class="fas fa-save"></i> Simpan</button>
+                </div>
+              </div>
+            </form>
           </div>
           <!-- /.card -->
         </div>
@@ -145,8 +190,10 @@
 <!-- jQuery -->
 <script src="<?php echo base_url('/assets/adminlte/plugins/jquery/jquery.min.js'); ?>"></script>
 <script>
-
+  var save_method;
+  var id_edit;
   var no_id=0;
+  var no_ket=0
   var noList=0;
 
   $(function(){
@@ -185,16 +232,35 @@
 
     });
 
-    $("#ADD_DATA").click(function(){
+    $("#ADD_KET").click(function(event){
+      event.preventDefault();
+
+      no_ket = no_ket+1;
+      var row = '<tr id="colKet_'+no_ket+'">'+
+                    '<td style="width:70px;"><button type="button" class="btn btn-sm btn-danger" style="border-radius:50%;"><i class="fas fa-minus"></i></button></td>'+
+                    '<td><textarea class="form-control" name="penjelasan[]" required></textarea></td>'+
+                  '</tr>';
+
+      $("#tb_ket tbody").append(row);
+
+    })
+
+    $("#ADD_DATA").click(function(event){
+      event.preventDefault();
+      if($("[name='id_supplier']").val() == ""){
+        toastr.error('Pilih Supplier dahulu')
+        return
+      }
+
       no_id = no_id+1;
       var row = '<tr id="col_'+no_id+'">'+
-                    '<td><button class="btn btn-sm btn-danger"><i class="fas fa-minus"></i></button></td>'+
-                    '<td><input type="text" class="form-control" style="font-size: 14px;" name="id_barang[]" id="id_barang_'+no_id+'" readonly></td>'+
+                    '<td><button type="button" class="btn btn-sm btn-danger"><i class="fas fa-minus"></i></button></td>'+
+                    '<td><input type="text" class="form-control" style="font-size: 14px;" required name="id_barang[]" id="id_barang_'+no_id+'" readonly></td>'+
                     '<td><button type="button" class="btn btn-default" name="BTN_ITEM_NO[]" onclick="SHOW_ITEMS('+no_id+')"><i class="fas fa-list"></i></button></td>'+
                     '<td id="ket_barang_'+no_id+'"></td>'+
-                    '<td><input type="text" class="form-control harga" name="harga[]" style="text-align: right;"></td>'+
-                    '<td><input type="text" class="form-control qty" name="qty_beli[]" style="text-align: right;" id="qty_beli_'+no_id+'"></td>'+
-                    '<td><input type="text" class="form-control" name="subtotal[]" id="subtotal_'+no_id+'" style="text-align: right;" readonly></td>'+
+                    '<td><input type="text" class="form-control harga" name="harga[]" required oninput="hitungSubTotal('+no_id+')" id="harga_'+no_id+'" style="text-align: right;"></td>'+
+                    '<td><input type="text" class="form-control qty" name="qty_beli[]" required oninput="hitungSubTotal('+no_id+')" style="text-align: right;" id="qty_beli_'+no_id+'"></td>'+
+                    '<td><input type="text" class="form-control subtotal" name="subtotal[]" required id="subtotal_'+no_id+'" style="text-align: right;" readonly></td>'+
                   '</tr>';
 
       $("#tb_data tbody").append(row);
@@ -211,7 +277,57 @@
 
     });
 
+    $("#FRM_DATA").on('submit', function(event){
+      event.preventDefault();
+      let formData = new FormData(this);
+
+      
+          urlPost = "<?php echo site_url('Pembelian/saveData') ?>";
+      // console.log(formData)
+      ACTION(urlPost, formData)
+    })
+
   })
+
+  function ACTION(urlPost, formData){
+    
+    $.ajax({
+      url: urlPost,
+      type: "POST",
+      data: formData,
+      beforeSend: function(){
+        $("#LOADER").show();
+      },
+      complete: function(){
+        $("#LOADER").hide();
+      },
+      processData : false,
+      cache: false,
+      contentType : false,
+      success: function(data){
+        data = JSON.parse(data)
+        console.log(data)
+        if (data.status == "success") {
+          toastr.info(data.message)
+          $("[name='id_pembelian']").val(DOC_NO)
+          DisabledForm()
+        }else{
+          toastr.error(data.message)
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    })
+     
+  }
+
+  function DisabledForm(){
+    var form = $("#FRM_DATA")[0];
+    [].slice.call( form.elements ).forEach(function(item){
+      item.disabled = !item.disabled;
+    });
+  }
 
   function SHOW_ITEMS(id){
     noList = id;
@@ -247,5 +363,22 @@
     $("#tb_select_item_filter input[type=search]").val("").change();
     $("#modal_add").modal('show')
     $("#tb_select_item tbody tr td").css("cursor","pointer");
+  }
+
+  function hitungSubTotal(id){
+    var hasil = parseFloat($("#harga_"+id).val()*$("#qty_beli_"+id).val())
+    $("#subtotal_"+id).val(hasil)
+
+    var jml = $(".subtotal")
+    var total=0
+    $.each(jml, function(index, item) {
+
+        SubTotal = $("[name='subtotal[]']")[index].value
+        if(SubTotal == "")
+          SubTotal = 0
+        total += parseFloat(SubTotal)
+    });
+    // console.log(total)
+    $("[name='tot_pembelian']").val(total)
   }
 </script>

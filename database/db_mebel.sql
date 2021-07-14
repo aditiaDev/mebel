@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jul 2021 pada 01.02
+-- Waktu pembuatan: 14 Jul 2021 pada 16.19
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -64,7 +64,13 @@ CREATE TABLE `tb_det_pembelian` (
 --
 
 INSERT INTO `tb_det_pembelian` (`id_det_pembelian`, `id_pembelian`, `id_barang`, `qty_beli`) VALUES
-(0, '130720210001', 'LEM000001', 2);
+(1, '130720210001', 'LEM000001', 2),
+(4, '140720210001', 'KUR000001', 4),
+(5, '140720210001', 'LEM000001', 5),
+(6, '140720210002', 'KUR000001', 2),
+(7, '140720210002', 'LEM000001', 2),
+(8, '140720210003', 'KUR000001', 2),
+(9, '140720210003', 'LEM000001', 2);
 
 -- --------------------------------------------------------
 
@@ -120,6 +126,14 @@ CREATE TABLE `tb_keterangan_pembelian` (
   `tgl_input` datetime DEFAULT NULL,
   `penjelasan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_keterangan_pembelian`
+--
+
+INSERT INTO `tb_keterangan_pembelian` (`id_ket_pembelian`, `id_pembelian`, `tgl_input`, `penjelasan`) VALUES
+(1, '140720210003', '2021-07-14 00:00:00', 'test 1'),
+(2, '140720210003', '2021-07-14 00:00:00', 'test 2');
 
 -- --------------------------------------------------------
 
@@ -179,7 +193,10 @@ CREATE TABLE `tb_pembelian` (
 
 INSERT INTO `tb_pembelian` (`id_pembelian`, `tgl_pembelian`, `id_supplier`, `status_pembelian`, `tot_pembelian`) VALUES
 ('130720210001', '2021-05-19 09:42:56', 1, 'pengajuan', 1300000),
-('130720210002', '2021-05-19 09:42:56', 1, 'selesai', 2300000);
+('130720210002', '2021-05-19 09:42:56', 1, 'selesai', 2300000),
+('140720210001', '2021-07-14 00:00:00', 1, 'pengajuan', 3900000),
+('140720210002', '2021-07-14 00:00:00', 1, 'pengajuan', 936),
+('140720210003', '2021-07-14 00:00:00', 1, 'pengajuan', 936);
 
 -- --------------------------------------------------------
 
@@ -385,6 +402,12 @@ ALTER TABLE `tb_user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_det_pembelian`
+--
+ALTER TABLE `tb_det_pembelian`
+  MODIFY `id_det_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_det_penjualan`
 --
 ALTER TABLE `tb_det_penjualan`
@@ -394,7 +417,7 @@ ALTER TABLE `tb_det_penjualan`
 -- AUTO_INCREMENT untuk tabel `tb_keterangan_pembelian`
 --
 ALTER TABLE `tb_keterangan_pembelian`
-  MODIFY `id_ket_pembelian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ket_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`

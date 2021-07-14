@@ -63,7 +63,10 @@
       resize: horizontal;
       overflow: auto;
     }
-    
+    .tb_no_top>thead>tr>th{
+        border: none;
+        vertical-align: middle;
+    }
     .tb_no_top>tbody>tr>td{
         border-top: none;
         vertical-align: middle;

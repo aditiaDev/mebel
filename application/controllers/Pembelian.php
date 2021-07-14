@@ -47,5 +47,66 @@ class Pembelian extends CI_Controller {
     $this->load->view('template/footer'); 
   }
   
+  public function saveData(){
+    
+    
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('tgl_pembelian', 'Tgl Pembelian', 'required');
+    $this->form_validation->set_rules('id_supplier', 'Supplier', 'required');
+    $this->form_validation->set_rules('tot_pembelian', 'Total Pembelian', 'required|numeric');
+    $this->form_validation->set_rules('id_barang[]', 'Barang', 'required');
+
+    if($this->form_validation->run() == FALSE){
+      // echo validation_errors();
+      $output = array("status" => "error", "message" => validation_errors());
+      echo json_encode($output);
+      return false;
+    }
+
+    $unik = date('dmY', strtotime($this->input->post('tgl_pembelian')));
+    $kode = $this->db->query("select MAX(id_pembelian) LAST_NO from tb_pembelian WHERE id_pembelian LIKE '".$unik."%'")->row()->LAST_NO;
+    
+    $urutan = (int) substr($kode, 8, 4);
+    $urutan++;
+    $huruf = $unik;
+    $kode = $huruf . sprintf("%04s", $urutan);
+    // echo $kode;
+    
+    $dataHeader = array(
+              "id_pembelian" => $kode,
+              "tgl_pembelian" => date("Y-m-d", strtotime($this->input->post('tgl_pembelian'))),
+              "id_supplier" => $this->input->post('id_supplier'),
+              "status_pembelian" => "pengajuan",
+              "tot_pembelian" => $this->input->post('tot_pembelian'),
+            );
+    $this->db->insert('tb_pembelian', $dataHeader);
+
+
+    foreach($this->input->post('id_barang') as $key => $each){
+      $dataDtl[] = array(
+        "id_pembelian" => $kode,
+        "id_barang" => $this->input->post('id_barang')[$key],
+        "qty_beli" => $this->input->post('qty_beli')[$key],
+      );
+    }
+
+    $this->db->insert_batch('tb_det_pembelian', $dataDtl);
+
+    if(!empty($this->input->post('penjelasan'))){
+      foreach($this->input->post('penjelasan') as $key => $each){
+        $dataKet[] = array(
+          "id_pembelian" => $kode,
+          "tgl_input" => date("Y-m-d"),
+          "penjelasan" => $this->input->post('penjelasan')[$key],
+        );
+      }
+
+      $this->db->insert_batch('tb_keterangan_pembelian', $dataKet);
+    }
+
+    $output = array("status" => "success", "message" => "Data Berhasil Disimpan", "DOC_NO" => $kode);
+    echo json_encode($output);
+
+  }
 
 }
