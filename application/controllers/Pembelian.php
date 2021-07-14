@@ -74,7 +74,7 @@ class Pembelian extends CI_Controller {
     
     $dataHeader = array(
               "id_pembelian" => $kode,
-              "tgl_pembelian" => date("Y-m-d", strtotime($this->input->post('tgl_pembelian'))),
+              "tgl_pembelian" => date("Y-m-d", strtotime($this->input->post('tgl_pembelian'))).' '.date("H:i:s"),
               "id_supplier" => $this->input->post('id_supplier'),
               "status_pembelian" => "pengajuan",
               "tot_pembelian" => $this->input->post('tot_pembelian'),
@@ -107,6 +107,20 @@ class Pembelian extends CI_Controller {
     $output = array("status" => "success", "message" => "Data Berhasil Disimpan", "DOC_NO" => $kode);
     echo json_encode($output);
 
+  }
+
+  public function deleteData(){
+    $this->db->where('id_pembelian', $this->input->post('id_pembelian'));
+    $this->db->delete('tb_keterangan_pembelian');
+    
+    $this->db->where('id_pembelian', $this->input->post('id_pembelian'));
+    $this->db->delete('tb_det_pembelian');
+
+    $this->db->where('id_pembelian', $this->input->post('id_pembelian'));
+    $this->db->delete('tb_pembelian');
+
+    $output = array("status" => "success", "message" => "Data Berhasil di Hapus");
+    echo json_encode($output);
   }
 
 }

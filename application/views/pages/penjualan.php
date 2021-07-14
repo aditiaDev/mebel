@@ -9,12 +9,12 @@
         <div class="col-12">
           <div class="card" style="margin-top: 1rem">
             <div class="card-header">
-              <h3 class="card-title">Data Pembelian</h3>
+              <h3 class="card-title">Data Penjualan</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               
-              <a href="<?php echo base_url("pembelian/addData/")?>" class="btn btn-sm btn-info" style="margin-bottom: 10px;"><i class="fas fa-plus-circle"></i> Tambah</a>
+              <!-- <a href="<?php echo base_url("penjualan/addData/")?>" class="btn btn-sm btn-info" style="margin-bottom: 10px;"><i class="fas fa-plus-circle"></i> Tambah</a> -->
               <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px">
                 <thead>
                 <tr>
@@ -224,8 +224,8 @@
   function deleteData(id){
     if(!confirm('Delete this data?')) return
 
-    urlPost = "<?php echo site_url('pembelian/deleteData') ?>";
-    formData = "id_pembelian="+id
+    urlPost = "<?php echo site_url('supplier/deleteData') ?>";
+    formData = "id_supplier="+id
     ACTION(urlPost, formData)
   }
 </script>

@@ -10,7 +10,7 @@
           <div class="card" style="margin-top: 1rem">
             <form id="FRM_DATA" method="post">
               <div class="card-header">
-                <h3 class="card-title">Tambah Pembelian</h3>
+                <h3 class="card-title">Tambah Pembelian </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -101,8 +101,10 @@
               <!-- /.card-body -->
               <div class="card-footer">
                 <div class="d-flex justify-content-center">
-                  <button class="btn btn-warning"><i class="fas fa-backspace"></i> Cancel</button>
-                  <button type="submit" class="btn btn-info" style="margin-left:10px;"><i class="fas fa-save"></i> Simpan</button>
+                  <button type="button" disabled name="btn_baru" class="btn btn-default" style="margin-left:10px;"><i class="fas fa-plus"></i> New</button>
+                  <a href="<?php echo base_url('pembelian'); ?>" onclick="return confirm('Are you sure?')"  style="margin-left:10px;" name="btn_cancel" class="btn btn-warning"><i class="fas fa-backspace"></i> Kembali</a>
+                  <button type="submit" name="btn_simpan" class="btn btn-info" style="margin-left:10px;"><i class="fas fa-save"></i> Simpan</button>
+                  <button type="button" disabled name="btn_cetak" class="btn btn-danger" style="margin-left:10px;"><i class="fas fa-print"></i> Cetak</button>
                 </div>
               </div>
             </form>
@@ -236,8 +238,8 @@
       event.preventDefault();
 
       no_ket = no_ket+1;
-      var row = '<tr id="colKet_'+no_ket+'">'+
-                    '<td style="width:70px;"><button type="button" class="btn btn-sm btn-danger" style="border-radius:50%;"><i class="fas fa-minus"></i></button></td>'+
+      var row = '<tr id="col_'+no_ket+'">'+
+                    '<td style="width:70px;"><button type="button" onclick="deleteRow(\'tb_ket\','+no_ket+')" class="btn btn-sm btn-danger" style="border-radius:50%;"><i class="fas fa-minus"></i></button></td>'+
                     '<td><textarea class="form-control" name="penjelasan[]" required></textarea></td>'+
                   '</tr>';
 
@@ -254,7 +256,7 @@
 
       no_id = no_id+1;
       var row = '<tr id="col_'+no_id+'">'+
-                    '<td><button type="button" class="btn btn-sm btn-danger"><i class="fas fa-minus"></i></button></td>'+
+                    '<td><button type="button" onclick="deleteRow(\'tb_data\','+no_id+')" class="btn btn-sm btn-danger"><i class="fas fa-minus"></i></button></td>'+
                     '<td><input type="text" class="form-control" style="font-size: 14px;" required name="id_barang[]" id="id_barang_'+no_id+'" readonly></td>'+
                     '<td><button type="button" class="btn btn-default" name="BTN_ITEM_NO[]" onclick="SHOW_ITEMS('+no_id+')"><i class="fas fa-list"></i></button></td>'+
                     '<td id="ket_barang_'+no_id+'"></td>'+
@@ -287,6 +289,33 @@
       ACTION(urlPost, formData)
     })
 
+    $("[name='btn_baru']").click(function(){
+      DisabledForm()
+      $("[name='id_pembelian']").val('')
+      $("[name='id_supplier']").val('')
+      $("[name='nm_supplier']").val('')
+      $("[name='tot_pembelian']").val('')
+
+      $("#tb_data tbody tr").remove()
+      $("#tb_ket tbody tr").remove()
+
+      $("[name='btn_baru']").attr('disabled',true)
+      $("[name='btn_cetak']").attr('disabled',true)
+      $("[name='btn_cancel']").attr('disabled',false)
+      $("[name='btn_simpan']").attr('disabled',false)
+    })
+
+    // $("#btn_print").click(function(){
+    //   var form = document.createElement("form");
+    //   $(form).attr("action", "http://intranet/mm/mod_laporan/rpt/Print_pr_rpt.php")
+    //          .attr("method", "post")
+    //          .attr("target", "_blank");
+    //   $(form).html('<input type="hidden" name="prno" value="'+$("[name='PR_NO']").val()+'" />');
+    //   document.body.appendChild(form);
+    //   $(form).submit();
+    //   document.body.removeChild(form);
+    // });
+
   })
 
   function ACTION(urlPost, formData){
@@ -309,8 +338,11 @@
         console.log(data)
         if (data.status == "success") {
           toastr.info(data.message)
-          $("[name='id_pembelian']").val(DOC_NO)
+          $("[name='id_pembelian']").val(data.DOC_NO)
           DisabledForm()
+          $("[name='btn_baru']").attr('disabled',false)
+          $("[name='btn_cetak']").attr('disabled',false)
+          $("[name='btn_cancel']").attr('disabled',false)
         }else{
           toastr.error(data.message)
         }
@@ -380,5 +412,9 @@
     });
     // console.log(total)
     $("[name='tot_pembelian']").val(total)
+  }
+
+  function deleteRow(table, id){
+    $('#'+table+' #col_'+id).remove();
   }
 </script>
