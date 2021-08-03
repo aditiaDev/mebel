@@ -20,6 +20,7 @@
                   <th>Kode</th>
                   <th>Kategori</th>
                   <th>Barang</th>
+                  <th>Keterangan</th>
                   <th>Harga Beli</th>
                   <th>Harga Jual</th>
                   <th>Stok</th>
@@ -75,6 +76,15 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <label>Nama Barang</label>
+                    <input type="text" class="form-control" name="nm_barang">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Keterangan Barang</label>
                     <textarea name="ket_barang" class="form-control" rows="3"></textarea>
                   </div>
                 </div>
@@ -188,7 +198,7 @@
   function REFRESH_DATA(){
     $('#tb_data').DataTable().destroy();
     var tb_data = $("#tb_data").DataTable({
-      "order": [[ 0, "asc" ]],
+      "order": [[ 0, "desc" ]],
       "pageLength": 25,
       "autoWidth": false,
       "responsive": true,
@@ -199,6 +209,7 @@
       "columns": [
           { "data": "id_barang" },
           { "data": "kategori_barang"},
+          { "data": "nm_barang"},
           { "data": "ket_barang"},
           { "data": "harga_beli"},
           { "data": "harga_jual"},
@@ -267,9 +278,10 @@
     $("[name='id_barang']").val(data.id_barang)
     $("[name='kategori_barang']").val(data.kategori_barang)
     $("[name='ket_barang']").val(data.ket_barang)
+    $("[name='nm_barang']").val(data.nm_barang)
     $("[name='stok']").val(data.stok)
-    $("[name='harga_beli']").val(data.harga_beli.replace(".",""))
-    $("[name='harga_jual']").val(data.harga_jual.replace(".",""))
+    $("[name='harga_beli']").val(data.harga_beli.replaceAll(".",""))
+    $("[name='harga_jual']").val(data.harga_jual.replaceAll(".",""))
     $("#modal_add").modal('show')
   }
 

@@ -10,6 +10,9 @@
               </p>
             </a>
           </li>
+          <?php
+            if($this->session->userdata('level') == "admin"){
+          ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -70,15 +73,97 @@
               
             </ul>
           </li>
-          
+
           <li class="nav-item">
-            <a href="<?php echo base_url("laporan")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="LAPORAN"){echo 'active';}?>">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Data Keuangan
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="<?php echo base_url("pemasukan/")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PEMASUKAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pemasukan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("pengeluaran/")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PENGELUARAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengeluaran</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <?php
+            }else{
+          ?>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Data Transaksi
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              <a href="<?php echo base_url("pembelian/")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PEMBELIAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pembelian</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+
+          <?php
+            }
+            if($this->session->userdata('level') == "pemilik"){
+          ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-print"></i>
               <p>
                 Laporan
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo base_url("laporan/penjualan")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PEMBELIAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Penjualan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("laporan/pembelian")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PENJUALAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pembelian</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="<?php echo base_url("laporan/pengeluaran")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PEMBELIAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pengeluaran</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("laporan/pemasukan")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="PENJUALAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pemasukan</p>
+                </a>
+              </li>
+              
+            </ul>
           </li>
+          <?php
+            }
+          ?>
           <li class="nav-item">
             <a href="<?php echo base_url("login/logout")?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

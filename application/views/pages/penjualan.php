@@ -18,10 +18,12 @@
               <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px">
                 <thead>
                 <tr>
-                  <th>ID Pembelian</th>
-                  <th>Tanggal Pembelian</th>
-                  <th>Supplier</th>
-                  <th>Total Pembelian</th>
+                  <th>ID Penjualan</th>
+                  <th>Tanggal</th>
+                  <th>No nota</th>
+                  <th>Tgl nota</th>
+                  <th>Pelanggan</th>
+                  <th>Total Pembayaran</th>
                   <th>Status</th>
                   <th>Detail</th>
                   <th style="min-width: 120px;">Action</th>
@@ -130,26 +132,31 @@
       "responsive": true,
       "pageLength": 25,
       "ajax": {
-          "url": "<?php echo site_url('pembelian/getAllData') ?>",
+          "url": "<?php echo site_url('penjualan/getAllData') ?>",
           "type": "GET"
       },
       "columns": [
-          { "data": "id_pembelian" },
-          { "data": "tgl_pembelian" },{ "data": "nm_supplier" },
-          { "data": "tot_pembelian" },{ "data": "status_pembelian" },
-          { "data": "id_pembelian", 
+          { "data": "id_penjualan" },
+          { "data": "tgl_jual" },{ "data": "no_nota" },
+          { "data": "tgl_nota" },
+          { "data": null,
+            "render": function(data){
+              return "ID: "+data.id_pelanggan+"</br> Nama: "+data.nm_pelanggan
+            }
+          },
+          { "data": "tot_penjualan" },{ "data": "status" },
+          { "data": "id_penjualan", 
             "render" : function(data){
-              return "<button class='btn btn-xs btn-default detail_data' onclick='detailData(\""+data+"\");'><i class='fas fa-edit'></i> Detail</button>"
+              return "<a class='btn btn-xs btn-default detail_data' href='<?php echo base_url('penjualan/dtlData/"+data+"') ?>'><i class='fas fa-edit'></i> Detail</a>"
             },
             className: "text-center"
           },
           { "data": null, 
             "render" : function(data){
-              if(data.status_pembelian == "pengajuan")
-                return "<button class='btn btn-sm btn-warning' onclick='editData("+JSON.stringify(data)+");'><i class='fas fa-edit'></i> Edit</button> "+
-                  "<button class='btn btn-sm btn-danger' onclick='deleteData(\""+data.id_pembelian+"\");'><i class='fas fa-trash'></i> Delete</button>"
+              if(data.status == "proses")
+                return "<button class='btn btn-sm btn-danger' onclick='deleteData(\""+data.id_penjualan+"\");'><i class='fas fa-trash'></i> Delete</button>"
               else
-                return "<button class='btn btn-sm btn-danger' onclick='deleteData(\""+data.id_pembelian+"\");'><i class='fas fa-trash'></i> Delete</button>"
+                return ""
             },
             className: "text-center"
           },
@@ -163,12 +170,11 @@
   $('#tb_data thead tr:eq(1) th').each( function (i) {
     
       var title = $(this).text();
-      if(i==4)
+      if(i==6)
           $(this).html("<select class='column_search'>"+
                           "<option value=''>All</option>"+
-                          "<option value='pengajuan'>Pengajuan</option>"+
-                          "<option value='terima'>Terima</option>"+
-                          "<option value='tolak'>Tolak</option>"+
+                          "<option value='proses'>Proses</option>"+
+                          "<option value='kirim'>Kirim</option>"+
                           "<option value='selesai'>Selesai</option>"+
                       "</select>");
       else
@@ -224,8 +230,8 @@
   function deleteData(id){
     if(!confirm('Delete this data?')) return
 
-    urlPost = "<?php echo site_url('supplier/deleteData') ?>";
-    formData = "id_supplier="+id
+    urlPost = "<?php echo site_url('penjualan/deleteData') ?>";
+    formData = "id_penjualan="+id
     ACTION(urlPost, formData)
   }
 </script>

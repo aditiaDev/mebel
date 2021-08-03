@@ -24,7 +24,7 @@
                   <th>Total Pembelian</th>
                   <th>Status</th>
                   <th>Detail</th>
-                  <th style="min-width: 120px;">Action</th>
+                  <th style="min-width: 150px;">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,6 +96,10 @@
   var tb_data;
   $(function () {
     
+    $(".datepicker").datepicker({
+      autoclose: true,
+      format: 'dd-M-yyyy'
+    });
 
     REFRESH_DATA()
     
@@ -139,17 +143,42 @@
           { "data": "tot_pembelian" },{ "data": "status_pembelian" },
           { "data": "id_pembelian", 
             "render" : function(data){
-              return "<button class='btn btn-xs btn-default detail_data' onclick='detailData(\""+data+"\");'><i class='fas fa-edit'></i> Detail</button>"
+              return "<a class='btn btn-xs btn-default detail_data' href='<?php echo base_url('pembelian/dtlData/"+data+"') ?>'><i class='fas fa-edit'></i> Detail</a>"
             },
             className: "text-center"
           },
           { "data": null, 
             "render" : function(data){
-              if(data.status_pembelian == "pengajuan")
-                return "<button class='btn btn-sm btn-warning' onclick='editData("+JSON.stringify(data)+");'><i class='fas fa-edit'></i> Edit</button> "+
-                  "<button class='btn btn-sm btn-danger' onclick='deleteData(\""+data.id_pembelian+"\");'><i class='fas fa-trash'></i> Delete</button>"
+              if(data.level == "pemilik"){
+                btnAction = '<div class="btn-group">'+
+                              '<button type="button" class="btn btn-info btn-sm btn-flat">Action</button>'+
+                              '<button type="button" class="btn btn-info btn-sm btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">'+
+                                '<span class="sr-only">Toggle Dropdown</span>'+
+                              '</button>'+
+                              '<div class="dropdown-menu" role="menu">'+
+                                '<a class="dropdown-item" href="#" onclick="changeStatus(\''+data.id_pembelian+'\',\'terima\')">Terima</a>'+
+                                '<a class="dropdown-item" href="#" onclick="changeStatus(\''+data.id_pembelian+'\',\'tolak\')">Tolak</a>'+
+                                '<a class="dropdown-item" href="#" onclick="changeStatus(\''+data.id_pembelian+'\',\'selesai\')">Selesai</a>'+
+                              '</div>'+
+                            '</div>'
+              }else if(data.level == "admin" && data.status_pembelian == "terima"){
+                btnAction = '<div class="btn-group">'+
+                              '<button type="button" class="btn btn-info btn-sm btn-flat">Action</button>'+
+                              '<button type="button" class="btn btn-info btn-sm btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">'+
+                                '<span class="sr-only">Toggle Dropdown</span>'+
+                              '</button>'+
+                              '<div class="dropdown-menu" role="menu">'+
+                                '<a class="dropdown-item" href="#" onclick="changeStatus(\''+data.id_pembelian+'\',\'selesai\')">Selesai</a>'+
+                              '</div>'+
+                            '</div>'
+              }else{
+                btnAction = ''
+              }
+              if(data.status_pembelian != "selesai")
+                return '<button class="btn btn-sm btn-danger" onclick="deleteData(\''+data.id_pembelian+'\');"><i class="fas fa-trash"></i> Delete</button> '+
+                      btnAction
               else
-                return "<button class='btn btn-sm btn-danger' onclick='deleteData(\""+data.id_pembelian+"\");'><i class='fas fa-trash'></i> Delete</button>"
+                return ""
             },
             className: "text-center"
           },
@@ -210,22 +239,21 @@
       })
   }
 
-  function editData(data, index){
-    console.log(data)
-    save_method = "edit"
-    id_edit = data.id_supplier;
-    $("#modal_add .modal-title").text('Edit Data')
-    $("[name='nm_supplier']").val(data.nm_supplier)
-    $("[name='no_tlp']").val(data.no_tlp)
-    $("[name='alamat']").val(data.alamat)
-    $("#modal_add").modal('show')
-  }
+  
 
   function deleteData(id){
     if(!confirm('Delete this data?')) return
 
     urlPost = "<?php echo site_url('pembelian/deleteData') ?>";
     formData = "id_pembelian="+id
+    ACTION(urlPost, formData)
+  }
+
+  function changeStatus(id, param){
+    if(!confirm('Update status this data?')) return
+
+    urlPost = "<?php echo site_url('pembelian/updateStatus') ?>";
+    formData = "id_pembelian="+id+"&status_pembelian="+param
     ACTION(urlPost, formData)
   }
 </script>

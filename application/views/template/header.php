@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mebel Buk Dhe Jepara</title>
-
+  <link rel="shortcut icon" type="image/icon" href="<?php echo base_url('/assets/furn/assets/logo/favicon.png'); ?>"/>
   <!-- Google Font: Source Sans Pro -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
   <!-- Font Awesome -->
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/select2/css/select2.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
   <!-- summernote -->
-  <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/summernote/summernote-bs4.min.css'); ?>">
+  <!-- <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/summernote/summernote-bs4.min.css'); ?>"> -->
   <link rel="stylesheet" href="<?php echo base_url('/assets/css/loader.css'); ?>">
   <style>
 
@@ -84,7 +84,7 @@
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
 <div class="before-loader" id="LOADER" style="display: none;">
   <div class="loader5" ></div>
 </div>
@@ -102,8 +102,12 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('home') ?>" class="nav-link">Home</a>
+      <li class="nav-item d-none d-sm-inline-block" id="menuHeader" style="display:none!important">
+        <button class="btn btn-sm btn-default" id="btn_tambah"><i class="fas fa-plus"></i> Tambah</button>
+        <button class="btn btn-sm btn-info" id="btn_edit"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn btn-sm btn-danger" id="btn_delete"><i class="fas fa-trash"></i> Delete</button>
+        <button class="btn btn-sm btn-primary" id="btn_save" disabled><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn btn-sm btn-warning" id="btn_cancel" disabled><i class="fas fa-times-circle"></i> Cancel</button>
       </li>
     </ul>
 

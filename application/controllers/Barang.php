@@ -5,8 +5,8 @@ class Barang extends CI_Controller {
 
   public function __construct(){
     parent::__construct();
-    // if(!$this->session->userdata('id_user'))
-    //   redirect('login', 'refresh');
+    if(!$this->session->userdata('id_user'))
+      redirect('login', 'refresh');
   }
 
   public function index(){
@@ -25,6 +25,7 @@ class Barang extends CI_Controller {
       $row = array();
       $data['data'][$no]['id_barang'] = $list->id_barang;
       $data['data'][$no]['kategori_barang'] = $list->kategori_barang;
+      $data['data'][$no]['nm_barang'] = $list->nm_barang;
       $data['data'][$no]['ket_barang'] = $list->ket_barang;
       $data['data'][$no]['harga_beli'] = number_format($list->harga_beli,0,',','.');
       $data['data'][$no]['harga_jual'] = number_format($list->harga_jual,0,',','.');
@@ -66,8 +67,8 @@ class Barang extends CI_Controller {
 
     if(!$this->upload->do_upload('foto')) //upload and validate
     {
-      $data['inputerror'][] = 'foto';
-			$data['error_string'][] = 'Upload error: '.$this->upload->display_errors('',''); //show ajax error
+      $data['inputerror'] = 'foto';
+			$data['message'] = 'Upload error: '.$this->upload->display_errors('',''); //show ajax error
 			$data['status'] = FALSE;
 			echo json_encode($data);
 			exit();
@@ -81,7 +82,8 @@ class Barang extends CI_Controller {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('id_barang', 'Kode Barang', 'required|is_unique[tb_barang.id_barang]');
     $this->form_validation->set_rules('kategori_barang', 'Kategori Barang', 'required');
-    $this->form_validation->set_rules('ket_barang', 'Nama Barang', 'required');
+    $this->form_validation->set_rules('nm_barang', 'Nama Barang', 'required');
+    $this->form_validation->set_rules('ket_barang', 'Keterangan Barang', 'required');
     $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
     $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
     $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
@@ -96,6 +98,7 @@ class Barang extends CI_Controller {
     $data = array(
               "id_barang" => $this->input->post('id_barang'),
               "kategori_barang" => $this->input->post('kategori_barang'),
+              "nm_barang" => $this->input->post('nm_barang'),
               "ket_barang" => $this->input->post('ket_barang'),
               "harga_beli" => $this->input->post('harga_beli'),
               "harga_jual" => $this->input->post('harga_jual'),
@@ -136,7 +139,8 @@ class Barang extends CI_Controller {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('id_barang', 'Kode Barang', 'required');
     $this->form_validation->set_rules('kategori_barang', 'Kategori Barang', 'required');
-    $this->form_validation->set_rules('ket_barang', 'Nama Barang', 'required');
+    $this->form_validation->set_rules('nm_barang', 'Nama Barang', 'required');
+    $this->form_validation->set_rules('ket_barang', 'Keterangan Barang', 'required');
     $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
     $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
     $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
@@ -151,6 +155,7 @@ class Barang extends CI_Controller {
     $data = array(
       "id_barang" => $this->input->post('id_barang'),
       "kategori_barang" => $this->input->post('kategori_barang'),
+      "nm_barang" => $this->input->post('nm_barang'),
       "ket_barang" => $this->input->post('ket_barang'),
       "harga_beli" => $this->input->post('harga_beli'),
       "harga_jual" => $this->input->post('harga_jual'),
@@ -183,6 +188,30 @@ class Barang extends CI_Controller {
     $output = array("status" => "success", "message" => "Data Berhasil di Update");
     echo json_encode($output);
 
+  }
+
+  public function getById(){
+    $id_barang = $this->input->post('id_barang');
+    $this->db->select('*');
+    $this->db->from('tb_barang');
+    $this->db->where('id_barang', $id_barang);
+    $dataList = $this->db->get()->result();
+
+    $no = 0;
+    $data = [];
+    foreach ($dataList as $list) {
+      $row = array();
+      $data[$no]['id_barang'] = $list->id_barang;
+      $data[$no]['kategori_barang'] = $list->kategori_barang;
+      $data[$no]['nm_barang'] = $list->nm_barang;
+      $data[$no]['ket_barang'] = $list->ket_barang;
+      $data[$no]['harga_beli'] = number_format($list->harga_beli,0,',','.');
+      $data[$no]['harga_jual'] = number_format($list->harga_jual,0,',','.');
+      $data[$no]['stok'] = number_format($list->stok,0,',','.');
+      $data[$no]['foto'] = $list->foto;
+      $no++;
+    }
+  	echo json_encode($data);
   }
 
 }

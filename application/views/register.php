@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JobLook</title>
+  <title>Mebel Buk Dhe Jepara</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,7 +20,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <h3>JobLook</h3>
+      <h3>Mebel Buk Dhe Jepara</h3>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new user</p>
@@ -29,17 +29,20 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label>Posisi yg dilamar </label>
-              <input type="hidden" class="form-control" name="id_lowongan_kerja" value="<?php echo $data->id_lowongan_kerja; ?>">
-              <input type="text" class="form-control" name="nm_lowongan_kerja" value="<?php echo $data->nm_lowongan_kerja; ?>" disabled>
+              <label>Nama</label>
+              <input type="text" class="form-control" name="nm_pelanggan">
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label>Nama Pelamar</label>
-              <input type="text" class="form-control" name="nm_pelamar">
+              <label>No Telp.</label>
+              <input type="text" class="form-control" name="no_tlp">
             </div>
           </div>
+        </div>
+        <div class="form-group">
+          <label>Alamat</label>
+          <textarea name="alamat" class="form-control"></textarea>
         </div>
         <div class="row">
           <div class="col-sm-6">
@@ -55,52 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label>Jenis Kelamin</label>
-              <select class="form-control" name="jenis_kelamin">
-                <option value="pria">Pria</option>
-                <option value="wanita">Wanita</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label>No. Telp</label>
-              <input type="text" class="form-control" name="no_tlp">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label>Pendidikan Terakhir</label>
-              <select class="form-control" name="lulusan">
-                <option value="SMA">SMA</option>
-                <option value="DI">DI</option>
-                <option value="DII">DII</option>
-                <option value="DIII">DIII</option>
-                <option value="S1">S1</option>
-                <option value="S2">S2</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label>Jurusan</label>
-              <input type="text" class="form-control" name="jurusan">
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <P>Alamat</P>
-          <input type="text" class="form-control" name="alamat_pelamar">
-        </div>
-        <div class="form-group">
-          <P>Kemampuan</P>
-          <textarea name="kemampuan" class="form-control" rows="5"></textarea>
-        </div>
+        
         <div class="row">
           <div class="col-4">
             <a href="<?php echo base_url("login")?>" class="btn btn-warning btn-block"><i class="fas fa-arrow-left"></i> Login Page</a>
@@ -149,7 +107,7 @@
             console.log(data)
             if (data.status == "success") {
               alert('Pendaftaran Berhasil')
-              window.location="<?php echo base_url('home');?>"
+              window.location="<?php echo base_url('login');?>"
             }else{
               toastr.error(data.message)
             }
