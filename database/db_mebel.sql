@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jul 2021 pada 01.02
+-- Waktu pembuatan: 04 Agu 2021 pada 15.19
 -- Versi server: 10.4.10-MariaDB
 -- Versi PHP: 7.3.12
 
@@ -44,11 +44,11 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`id_barang`, `kategori_barang`, `ket_barang`, `harga_beli`, `harga_jual`, `stok`, `foto`, `nm_barang`) VALUES
-('KUR000001', 'kursi', 'Kursi kayu sekolah pohon mahoni', 300000, 350000, 26, '1626161747823.jpg', 'Kursi kayu sekolah pohon mahoni'),
-('KUR000002', 'kursi', 'Deskripsi\r\nLebar 30\r\nTinggi 75\r\n\r\nJamin harga termurah kualitas ga murahan !!!\r\n\r\nReady stok !\r\nKursi kayu jati belanda, kursi cafe,\r\nProduksi sendiri\r\nSudah finishing vernish natural', 150000, 180000, 28, '1626392832798.jpeg', 'Kursi kayu jati belanda'),
-('KUR000003', 'kursi', 'BANGKU SINGLE BUATAN JATI ASLI\r\nKUAT MULUS NYAMAN DAN MEWAH', 350000, 400000, 28, '1626392912071.jpg', 'Kursi kayu jati ukiran'),
+('KUR000001', 'kursi', 'Kursi kayu sekolah pohon mahoni', 300000, 350000, 25, '1626161747823.jpg', 'Kursi kayu sekolah pohon mahoni'),
+('KUR000002', 'kursi', 'Deskripsi\r\nLebar 30\r\nTinggi 75\r\n\r\nJamin harga termurah kualitas ga murahan !!!\r\n\r\nReady stok !\r\nKursi kayu jati belanda, kursi cafe,\r\nProduksi sendiri\r\nSudah finishing vernish natural', 150000, 180000, 27, '1626392832798.jpeg', 'Kursi kayu jati belanda'),
+('KUR000003', 'kursi', 'BANGKU SINGLE BUATAN JATI ASLI\r\nKUAT MULUS NYAMAN DAN MEWAH', 350000, 400000, 27, '1626392912071.jpg', 'Kursi kayu jati ukiran'),
 ('KUR000004', 'kursi', 'Fitur Kursi Taman\r\nCocok di ruang Anda, sesuai dengan anggaran Anda\r\nKapasitas Tempat Duduk: 3\r\nTempat duduk yang dalam dan punggung yang tinggi dengan lengan untuk kenyamanan dan dukungan maksimal\r\nTahan Cuaca', 370000, 430000, 30, '1626392989819.jpg', 'Kursi kayu taman, kayu jati solid'),
-('LEM000001', 'lemari', 'Lemari kayu jati original full sampai belakang dan atas\r\n\r\nBahan: kayu jati muda\r\nUkuran (P x L x T) :  160 x 55 x 200 cm\r\nFinishing: pelitur', 500000, 650000, 28, 'lemari.jpg', 'Lemari 2 pintu + kaca'),
+('LEM000001', 'lemari', 'Lemari kayu jati original full sampai belakang dan atas\r\n\r\nBahan: kayu jati muda\r\nUkuran (P x L x T) :  160 x 55 x 200 cm\r\nFinishing: pelitur', 500000, 650000, 31, 'lemari.jpg', 'Lemari 2 pintu + kaca'),
 ('LEM000002', 'lemari', 'Kondisi Barang\r\nBARU\r\nSpesifikasi\r\nKategori	:	Lemari\r\nBerat	:	60 kilogram\r\nAsal Barang	:	Lokal\r\nDeskripsi\r\n*Info Kepada Kami Terlebih Dahulu Terkait Preoder &amp; Sistem Pengiriman bukalapak.\r\n\r\nKode: Raf-Lp-001\r\nUkuran : 110x60x220 cm\r\nBahan : Kayu Jati\r\nFinishing : Natural Melamik (Termasuk Finishing)\r\nHarga : Rp. 4.300.000 (Nego Hubungi Kami)\r\nOngkos Kirim: Belum termasuk Ongkos Kirim\r\nproses : 30 Hari (Tergantung Banyak Pemesanan)\r\n', 700000, 800000, 30, '1626393059183.jpg', 'Almari Lemari Pakaian Baju Pintu 2 Minimalis Gantung Kayu'),
 ('LEM000003', 'lemari', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu', 500000, 580000, 30, '1626393135792.jpg', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu'),
 ('LEM000004', 'lemari', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati\r\nLemari pakaian rahwana merupakan produk furniture jepara yang terbuat dari kayu jati berkualitas serta mempunyai kontruksi kuat dan kokoh.\r\n\r\nLemari baju rahwana di desain apik dengan 4 pintu serta ukiran cantik dan mempunyai sentuhan warna natural melamine, sehingga terlihat mewah dan elegan. Sangat bagus untuk pengisian perabot mebel di ruang tidur rumah anda.', 900000, 1200000, 30, '1626393952642.jpg', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati'),
@@ -87,7 +87,8 @@ INSERT INTO `tb_det_pembelian` (`id_det_pembelian`, `id_pembelian`, `id_barang`,
 (13, '150720210003', 'KUR000001', 1, 300000),
 (14, '150720210004', 'KUR000001', 1, 300000),
 (15, '150720210004', 'LEM000001', 3, 500000),
-(18, 'B210720210001', 'KUR000001', 2, 400000);
+(18, 'B210720210001', 'KUR000001', 2, 400000),
+(19, 'B020820210001', 'KUR000001', 3, 300000);
 
 -- --------------------------------------------------------
 
@@ -115,10 +116,10 @@ INSERT INTO `tb_det_penjualan` (`id_det_penjualan`, `id_penjualan`, `id_barang`,
 (12, 'J200720210002', 'KUR000003', 1, 400000, 'masih proses'),
 (13, 'J200720210002', 'KUR000001', 1, 400000, 'masih proses'),
 (14, 'J200720210003', 'KUR000001', 1, 400000, 'masih proses'),
-(15, 'J200720210004', 'KUR000003', 1, 400000, 'masih proses'),
-(16, 'J200720210004', 'KUR000002', 1, 180000, 'masih proses'),
+(15, 'J200720210004', 'KUR000003', 1, 400000, 'sudah jadi'),
+(16, 'J200720210004', 'KUR000002', 1, 180000, 'sudah jadi'),
 (17, 'J210720210001', 'KUR000003', 2, 400000, 'sudah jadi'),
-(18, 'J210720210002', 'KUR000001', 3, 350000, 'masih proses');
+(18, 'J210720210002', 'KUR000001', 3, 350000, 'sudah jadi');
 
 -- --------------------------------------------------------
 
@@ -139,6 +140,14 @@ CREATE TABLE `tb_jurnal_keuangan` (
 --
 
 INSERT INTO `tb_jurnal_keuangan` (`id_jurnal_uang`, `tgl_input`, `id_relasi`, `masuk`, `keluar`) VALUES
+('U030820210001', '2021-08-03 18:32:53', 'K030820210001', NULL, 1800000),
+('U030820210002', '2021-08-03 18:32:56', 'K030820210002', NULL, 300000),
+('U030820210003', '2021-08-01 20:04:55', 'M030820210001', 1000000, NULL),
+('U030820210004', '2021-08-03 19:46:17', 'M030820210002', 500000, NULL),
+('U030820210005', '2021-08-02 21:07:54', 'K030820210003', NULL, 500000),
+('U030820210006', '2021-08-01 21:08:22', 'K030820210004', NULL, 4000000),
+('U040820210001', '2021-08-04 19:48:39', 'M040820210001', 1050000, NULL),
+('U040820210002', '2021-08-04 19:49:07', 'M040820210002', 580000, NULL),
 ('U200720210001', '2021-07-20 13:29:27', 'K200720210001', NULL, 1800000),
 ('U200720210002', '2021-07-20 13:34:56', 'M200720210001', 1410000, NULL),
 ('U210720210001', '2021-07-21 05:29:15', 'K210720210001', NULL, 800000),
@@ -163,6 +172,10 @@ CREATE TABLE `tb_jurnal_stok` (
 --
 
 INSERT INTO `tb_jurnal_stok` (`id_jurnal_stok`, `tgl_input`, `id_relasi`, `masuk`, `keluar`) VALUES
+('S030820210001', '2021-08-03 18:32:53', 'K030820210001', 4, NULL),
+('S030820210002', '2021-08-03 18:32:56', 'K030820210002', 1, NULL),
+('S040820210001', '2021-08-04 19:48:39', 'M040820210001', NULL, 3),
+('S040820210002', '2021-08-04 19:49:07', 'M040820210002', NULL, 2),
 ('S200720210001', '2021-07-20 13:29:27', 'K200720210001', 4, NULL),
 ('S200720210002', '2021-07-20 13:34:56', 'M200720210001', NULL, 5),
 ('S210720210001', '2021-07-21 05:29:15', 'K210720210001', 2, NULL),
@@ -210,7 +223,7 @@ CREATE TABLE `tb_pelanggan` (
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nm_pelanggan`, `no_tlp`, `alamat`, `id_user`) VALUES
-(1, 'Aditia', '08978798123', 'Kudus', 4),
+(1, 'Aditia', '085643520576', 'Kudus', 4),
 (2, 'Joko', '08977886778', 'Pati', 5),
 (4, 'test 1', '08578912342', 'test alamat', 7);
 
@@ -235,6 +248,10 @@ CREATE TABLE `tb_pemasukan` (
 --
 
 INSERT INTO `tb_pemasukan` (`id_pemasukan`, `id_pelanggan`, `id_relasi`, `tgl_input`, `tipe_pemasukan`, `nominal_masuk`, `keterangan`) VALUES
+('M030820210001', NULL, NULL, '2021-08-01 20:04:55', 'non penjualan', 1000000, 'Donasi PPKM'),
+('M030820210002', NULL, NULL, '2021-08-03 19:46:17', 'non penjualan', 500000, 'Beli cat kayu'),
+('M040820210001', 1, 'J210720210002', '2021-08-04 19:48:39', 'penjualan', 1050000, NULL),
+('M040820210002', 1, 'J200720210004', '2021-08-04 19:49:07', 'penjualan', 580000, NULL),
 ('M200720210001', 1, 'J180720210001', '2021-07-20 13:34:56', 'penjualan', 1410000, NULL),
 ('M210720210001', 1, 'J210720210001', '2021-07-21 05:30:58', 'penjualan', 800000, NULL);
 
@@ -257,13 +274,14 @@ CREATE TABLE `tb_pembelian` (
 --
 
 INSERT INTO `tb_pembelian` (`id_pembelian`, `tgl_pembelian`, `id_supplier`, `status_pembelian`, `tot_pembelian`) VALUES
-('140720210001', '2021-07-14 00:00:00', 1, 'selesai', 3700000),
+('140720210001', '2021-07-14 00:00:00', 1, 'terima', 3700000),
 ('140720210002', '2021-07-14 00:00:00', 1, 'pengajuan', 1600000),
 ('140720210003', '2021-07-14 00:00:00', 1, 'pengajuan', 1600000),
 ('150720210001', '2021-07-15 04:12:25', 1, 'pengajuan', 5500000),
 ('150720210002', '2021-07-15 04:13:59', 1, 'pengajuan', 600000),
-('150720210003', '2021-07-15 04:46:32', 1, 'terima', 300000),
+('150720210003', '2021-07-15 04:46:32', 1, 'selesai', 300000),
 ('150720210004', '2021-07-15 04:51:01', 1, 'selesai', 1800000),
+('B020820210001', '2021-08-02 06:17:24', 1, 'pengajuan', 900000),
 ('B210720210001', '2021-07-21 05:27:39', 1, 'selesai', 800000);
 
 -- --------------------------------------------------------
@@ -286,6 +304,10 @@ CREATE TABLE `tb_pengeluaran` (
 --
 
 INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `tgl_input`, `tipe_pengeluaran`, `id_relasi`, `nominal_keluar`, `keperluan`) VALUES
+('K030820210001', '2021-08-03 18:32:53', 'pembelian', '150720210004', 1800000, NULL),
+('K030820210002', '2021-08-03 18:32:56', 'pembelian', '150720210003', 300000, NULL),
+('K030820210003', '2021-08-02 21:07:54', 'non pembelian', NULL, 500000, 'Pembelian plitur'),
+('K030820210004', '2021-08-01 21:08:22', 'non pembelian', NULL, 4000000, 'Beli Kayu'),
 ('K200720210001', '2021-07-20 13:29:27', 'pembelian', '150720210004', 1800000, NULL),
 ('K210720210001', '2021-07-21 05:29:15', 'pembelian', 'B210720210001', 800000, NULL);
 
@@ -312,13 +334,13 @@ CREATE TABLE `tb_penjualan` (
 --
 
 INSERT INTO `tb_penjualan` (`id_penjualan`, `tgl_jual`, `tgl_nota`, `no_nota`, `tot_penjualan`, `status`, `ket_penjualan`, `id_pelanggan`, `alamat_pengiriman`) VALUES
-('J180720210001', '2021-07-18 07:54:17', '2021-07-20', '200720210002', 1410000, 'selesai', 'keterangan', 2, 'Kudus'),
-('J200720210001', '2021-07-20 20:25:44', NULL, NULL, 2400000, 'proses', 'jati', 1, 'Pati'),
+('J180720210001', '2021-07-18 07:54:17', '2021-07-20', '200720210002', 1410000, 'kirim', 'keterangan', 2, 'Kudus'),
+('J200720210001', '2021-07-20 20:25:44', NULL, NULL, 2400000, 'kirim', 'jati', 1, 'Pati'),
 ('J200720210002', '2021-07-20 20:26:32', NULL, NULL, 750000, 'proses', 'kayu jati', 1, 'Kudus'),
 ('J200720210003', '2021-07-20 20:46:02', NULL, NULL, 350000, 'proses', '', 1, 'asdasdd'),
-('J200720210004', '2021-07-20 20:47:32', NULL, NULL, 580000, 'proses', '', 1, 'sadsadsad'),
-('J210720210001', '2021-07-21 05:25:27', '2021-07-22', '200720210003', 800000, 'selesai', '', 1, 'Purwosari rt1 rw 5, Kudus'),
-('J210720210002', '2021-07-21 05:25:45', NULL, NULL, 1050000, 'proses', '', 1, 'Purwosari rt1 rw 5, Kudus');
+('J200720210004', '2021-07-20 20:47:32', NULL, '', 580000, 'selesai', '', 1, 'sadsadsad'),
+('J210720210001', '2021-07-21 05:25:27', '2021-07-22', '200720210003', 800000, 'kirim', '', 1, 'Purwosari rt1 rw 5, Kudus'),
+('J210720210002', '2021-07-21 05:25:45', NULL, '', 1050000, 'selesai', '', 1, 'Purwosari rt1 rw 5, Kudus');
 
 -- --------------------------------------------------------
 
@@ -491,7 +513,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_det_pembelian`
 --
 ALTER TABLE `tb_det_pembelian`
-  MODIFY `id_det_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_det_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_det_penjualan`

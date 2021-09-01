@@ -1,12 +1,12 @@
 <div class="content-wrapper">  
   <section class="content">
     <div class="container-fluid">
-        <form action="<?php echo base_url('laporan/cetakPengeluaran') ?>" method="POST" target="_blank">
+        <form action="<?php echo base_url('laporan/cetakKeuangan') ?>" method="POST" target="_blank">
             <div class="row">
                 <div class="col-12">
                 <div class="card" style="margin-top: 1rem">
                     <div class="card-header">
-                    <h3 class="card-title">Laporan Pengeluaran</h3>
+                    <h3 class="card-title">Laporan Keuangan</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

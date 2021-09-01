@@ -2,6 +2,12 @@
 <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('/assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css'); ?>">
+<style>
+  #tb_data>tbody>tr>td>.form-control{
+    font-size: 12px;
+    height: 30px;
+  }
+</style>
 <div class="content-wrapper">  
   <section class="content">
     <div class="container-fluid">
@@ -23,7 +29,13 @@
                             <td style="text-align:right;">Tanggal</td>
                             <td style="width:200px;"><input type="text" class="form-control" name="tgl_jual"  readonly ></td>
                             <td style="text-align:right;">Status</td>
-                            <td><input type="text" class="form-control" name="status" style="text-transform: uppercase;" readonly ></td>
+                            <td>
+                                <select name="status"  class="form-control">
+                                    <option value="proses">Proses</option>
+                                    <option value="kirim">Kirim</option>
+                                    <option value="selesai">Selesai</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align:right;">No Nota</td>
@@ -38,13 +50,7 @@
                             <td colspan="2"><textarea name="alamat_pengiriman" class="form-control"></textarea></td>
                             <td></td>
                             <td style="text-align:right;">Status</td>
-                            <td>
-                                <select name="status"  class="form-control">
-                                    <option value="proses">Proses</option>
-                                    <option value="kirim">Kirim</option>
-                                    <option value="selesai">Selesai</option>
-                                </select>
-                            </td>
+                            
                         </tr>
                         <tr>
                             <td style="text-align:right;vertical-align: top;">Keterangan</td>
@@ -61,19 +67,22 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <table class="table table-bordered" id="tb_data" style="font-size:14px" >
+                      <div style="position: relative;height: 400px;overflow: auto;display: block;">
+                        <table class="table table-bordered" id="tb_data" style="font-size:12px;width:1100px;" >
                             <thead>
-                                <th style="width: 170px;">Kode Barang</th>
-                                <th style="width: 350px;">Deskripsi</th>
-                                <th >Harga</th>
-                                <th >Qty</th>
-                                <th>Sub Total</th>
+                                <th style="width: 130px;">Kode Barang</th>
+                                <th style="width: 310px;">Deskripsi</th>
+                                <th style="width: 140px;">Harga</th>
+                                <th style="width: 100px;">Qty</th>
+                                <th style="width: 140px;">Finishing</th>
+                                <th style="width: 170px;">Sub Total</th>
                                 <th>Change Status</th>
                             </thead>
                             <tbody >
                                 
                             </tbody>
                         </table>
+                      </div>
                     </div>
                 </div>
 
@@ -177,9 +186,12 @@
         $("#btn_tambah").attr("disabled", true)
         
         REFRESH_DATA($("[name='id_penjualan']").val())
-        setTimeout(function(){
-            DisabledForm()
-        }, 100)
+        // setTimeout(function(){
+        //     DisabledForm()
+        //     if($("[name='status']").val() == "proses"){
+        //       $("[name='finishing[]']").attr('disabled', false)
+        //     }
+        // }, 100)
 
         $("#btn_edit").click(function(){
             $("#btn_tambah").attr("disabled", true)
@@ -193,6 +205,9 @@
             $("[name='tgl_nota']").attr("disabled", false)
             $("[name='status_barang[]']").attr("disabled", false)
             $("[name='id_barang[]']").attr("disabled", false)
+            $("[name='finishing[]']").attr('disabled', false)
+            $("[name='subtotal[]']").attr('disabled', false)
+            $("[name='tot_penjualan']").attr('disabled', false)
             $("[name='status']").attr("disabled", false)
             $("[name='id_pelanggan']").attr("disabled", false)
 
@@ -224,6 +239,9 @@
                         $("[name='status']").attr("disabled", true)
                         $("[name='status_barang[]']").attr("disabled", true)
                         $("[name='id_barang[]']").attr("disabled", true)
+                        $("[name='finishing[]']").attr('disabled', true)
+                        $("[name='subtotal[]']").attr('disabled', true)
+                        $("[name='tot_penjualan']").attr('disabled', true)
 
                         $("#btn_tambah").attr("disabled", true)
                         $("#btn_edit").attr("disabled", false)
@@ -274,7 +292,7 @@
 
                 $.each(data, function(index, item){
                     
-                    subTotal = parseInt(item.jumlah*item.harga)
+                    subTotal = parseInt(item.jumlah*item.harga)+parseInt(item.finishing)
                     
                         var btn = '<select name="status_barang[]">'+
                                         '<option value="masih proses">Proses Pengerjaan</option>'+
@@ -287,7 +305,8 @@
                                 '<td><input type="text" value="'+item.id_barang+'" class="form-control" style="font-size: 14px;" required name="id_barang[]" id="id_barang_'+index+'" readonly></td>'+
                                 '<td id="ket_barang_'+index+'">'+item.nm_barang+'</td>'+
                                 '<td><input type="text" value="'+item.harga+'" class="form-control harga" name="harga[]" required oninput="hitungSubTotal('+index+')" id="harga_'+index+'" style="text-align: right;"></td>'+
-                                '<td><input type="text" value="'+item.jumlah+'" class="form-control qty" name="jumlah[]" required oninput="hitungSubTotal('+index+')" style="text-align: right;" id="qty_beli_'+index+'"></td>'+
+                                '<td><input type="text" value="'+item.jumlah+'" class="form-control qty" name="jumlah[]" required oninput="hitungSubTotal('+index+')" style="text-align: right;" id="jumlah_'+index+'"></td>'+
+                                '<td><input type="text" value="'+item.finishing+'" class="form-control finishing" name="finishing[]" required oninput="hitungSubTotal('+index+')" style="text-align: right;" id="finishing_'+index+'"></td>'+
                                 '<td><input type="text" value="'+subTotal+'" class="form-control subtotal" name="subtotal[]" required id="subtotal_'+index+'" style="text-align: right;" readonly></td>'+
                                 '<td>'+btn+'</td>'+
                             '</tr>';
@@ -295,6 +314,10 @@
                     $("[name='status_barang[]']:eq("+index+")").val(item.status_barang)
                 })
                 
+                DisabledForm()
+                // if(data[0].status == "proses"){
+                //   $("[name='finishing[]']").attr('disabled', false)
+                // }
                 
                 if(data[0].status == "selesai"){
                     $("#btn_edit").attr("disabled", true)
@@ -312,5 +335,24 @@
         [].slice.call( form.elements ).forEach(function(item){
             item.disabled = !item.disabled;
         });
+    }
+
+    function hitungSubTotal(id){
+        // console.log(id)
+        var hasil = parseFloat($("#jumlah_"+id).val()*$("#harga_"+id).val())+parseFloat($("#finishing_"+id).val())
+        $(".subtotal:eq("+id+")").val(hasil)
+
+        var jml = $(".subtotal")
+        var total=0
+        $.each(jml, function(index, item) {
+            // if($(".selectedItem:eq("+index+")").prop('checked') == true){
+                SubTotal = $(".subtotal:eq("+index+")").val()
+                if(SubTotal == "")
+                SubTotal = 0
+                total += parseFloat(SubTotal)
+            // }
+        });
+        // console.log(total)
+        $("[name='tot_penjualan']").val(total)
     }
 </script>

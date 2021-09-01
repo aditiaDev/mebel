@@ -22,7 +22,7 @@
 	  		</tr>
 	  	</thead>
 	  	<tbody>
-		  	<?php $no=1; ?>
+		  	<?php $no=1;$total=0; ?>
 				<?php foreach($data as $row): ?>
 				<tr>
 					<td><?php echo $no; ?></td>
@@ -32,11 +32,20 @@
 					<td><?php echo $row['id_relasi']; ?></td>
 					<td><?php echo $row['keterangan']; ?></td>
 					<td><?php echo $row['nm_pelanggan']; ?></td>
-					<td><?php echo number_format($row['nominal_masuk'],0,',','.'); ?></td>
+					<td style="text-align:right;"><?php echo number_format($row['nominal_masuk'],0,',','.'); ?></td>
 				</tr>
-				<?php $no++; ?>
+				<?php 
+                    $no++;
+                    $total = $total+$row['nominal_masuk'];
+                ?>
 	  		<?php endforeach; ?>
 	  	</tbody>
+		<tfoot>
+            <tr>
+                <td colspan="7" style="text-align:center;"><b>Total</b></td>
+                <td style="text-align:right;"><?php echo number_format($total,0,',','.'); ?></td>
+            </tr>
+        </tfoot>
 	  </table>
  
 </div>

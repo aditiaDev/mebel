@@ -158,6 +158,12 @@
                   <p>Data Pemasukan</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("laporan/keuangan")?>" class="nav-link <?php if(strtoupper($this->uri->segment(1))=="KEUANGAN"){echo 'active';}?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Keuangan</p>
+                </a>
+              </li>
               
             </ul>
           </li>

@@ -18,7 +18,9 @@ class Barang extends CI_Controller {
 
   public function getAllData(){
 
-    $dataList = $this->db->get('tb_barang')->result();
+    // $dataList = $this->db->get('tb_barang')->result();
+    $dataList = $this->db->query("select * from tb_barang where jenis like '%".$this->input->post('jenis')."%'")->result();
+
     $no = 0;
     $data['data'] = [];
     foreach ($dataList as $list) {
@@ -26,6 +28,7 @@ class Barang extends CI_Controller {
       $data['data'][$no]['id_barang'] = $list->id_barang;
       $data['data'][$no]['kategori_barang'] = $list->kategori_barang;
       $data['data'][$no]['nm_barang'] = $list->nm_barang;
+      $data['data'][$no]['jenis'] = $list->jenis;
       $data['data'][$no]['ket_barang'] = $list->ket_barang;
       $data['data'][$no]['harga_beli'] = number_format($list->harga_beli,0,',','.');
       $data['data'][$no]['harga_jual'] = number_format($list->harga_jual,0,',','.');
@@ -103,6 +106,7 @@ class Barang extends CI_Controller {
               "harga_beli" => $this->input->post('harga_beli'),
               "harga_jual" => $this->input->post('harga_jual'),
               "stok" => $this->input->post('stok'),
+              "jenis" => $this->input->post('jenis'),
             );
 
     if(!empty($_FILES['foto']['name'])){
@@ -160,6 +164,7 @@ class Barang extends CI_Controller {
       "harga_beli" => $this->input->post('harga_beli'),
       "harga_jual" => $this->input->post('harga_jual'),
       "stok" => $this->input->post('stok'),
+      "jenis" => $this->input->post('jenis'),
     );
 
     if(!empty($_FILES['foto']['name'])){

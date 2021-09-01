@@ -23,7 +23,7 @@
 	  		</tr>
 	  	</thead>
 	  	<tbody>
-		  	<?php $no=1; ?>
+		  	<?php $no=1;$total=0; ?>
 				<?php foreach($data as $row): ?>
 				<tr>
 					<td><?php echo $no; ?></td>
@@ -32,13 +32,22 @@
 					<td><?php echo $row['id_barang']; ?></td>
 					<td><?php echo $row['nm_barang']; ?></td>
 					<td><?php echo $row['kategori_barang']; ?></td>
-					<td><?php echo $row['harga']; ?></td>
-					<td><?php echo $row['qty_beli']; ?></td>
-					<td><?php echo $row['subtotal']; ?></td>
+					<td style="text-align:right;"><?php echo number_format($row['harga'],0,',','.'); ?></td>
+					<td style="text-align:right;"><?php echo $row['qty_beli']; ?></td>
+					<td style="text-align:right;"><?php echo number_format($row['subtotal'],0,',','.'); ?></td>
 				</tr>
-				<?php $no++; ?>
+				<?php 
+                    $no++;
+                    $total = $total+$row['subtotal'];
+                ?>
 	  		<?php endforeach; ?>
 	  	</tbody>
+		<tfoot>
+            <tr>
+                <td colspan="8" style="text-align:center;"><b>Total</b></td>
+                <td style="text-align:right;"><?php echo number_format($total,0,',','.'); ?></td>
+            </tr>
+        </tfoot>
 	  </table>
  
 </div>

@@ -58,7 +58,7 @@ class Penjualan extends CI_Controller {
 
   public function getDataById(){
     $id = $this->input->post('id_penjualan');
-    $this->db->select('a.*, b.id_barang, b.id_det_penjualan, b.jumlah, b.harga, b.status_barang, d.nm_barang, c.nm_pelanggan, c.id_pelanggan');
+    $this->db->select('a.*, b.id_barang, b.id_det_penjualan, b.jumlah, b.harga, ifnull(b.finishing,0) finishing, b.status_barang, d.nm_barang, c.nm_pelanggan, c.id_pelanggan');
     $this->db->from('tb_penjualan a'); 
     $this->db->join('tb_det_penjualan b', 'a.id_penjualan=b.id_penjualan');
     $this->db->join('tb_pelanggan c', 'a.id_pelanggan=c.id_pelanggan');
@@ -85,6 +85,7 @@ class Penjualan extends CI_Controller {
       $data[$no]['nm_barang'] = $list->nm_barang;
       $data[$no]['jumlah'] = $list->jumlah;
       $data[$no]['harga'] = $list->harga;
+      $data[$no]['finishing'] = $list->finishing;
       $data[$no]['status_barang'] = $list->status_barang;
 
       $data[$no]['nm_pelanggan'] = $list->nm_pelanggan;
@@ -101,7 +102,10 @@ class Penjualan extends CI_Controller {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('id_penjualan', 'ID Penjualan', 'required');
     $this->form_validation->set_rules('id_barang[]', 'Barang', 'required');
+    $this->form_validation->set_rules('finishing[]', 'Biaya Finishing', 'required');
     $this->form_validation->set_rules('status_barang[]', 'Status Barang', 'required');
+    $this->form_validation->set_rules('subtotal[]', 'Sub Total', 'required');
+    $this->form_validation->set_rules('tot_penjualan', 'Total Harga', 'required');
 
     if($this->form_validation->run() == FALSE){
       // echo validation_errors();
@@ -114,6 +118,7 @@ class Penjualan extends CI_Controller {
         "no_nota" => $this->input->post('no_nota'),
         "tgl_nota" => ($this->input->post('tgl_nota') == "") ? null : date('Y-m-d', strtotime($this->input->post('tgl_nota'))),
         "status" => $this->input->post('status'),
+        "tot_penjualan" => str_replace(".", "", $this->input->post('tot_penjualan')),
       );
 
     $this->db->where('id_penjualan', $this->input->post('id_penjualan'));
@@ -122,6 +127,7 @@ class Penjualan extends CI_Controller {
     foreach($this->input->post('id_barang') as $key => $each){
       $dataDtl = array(
         "status_barang" => $this->input->post('status_barang')[$key],
+        "finishing" => $this->input->post('finishing')[$key],
       );
 
       $this->db->where('id_penjualan', $this->input->post('id_penjualan'));

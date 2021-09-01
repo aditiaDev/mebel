@@ -13,13 +13,26 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <button class="btn btn-sm btn-info" style="margin-bottom: 10px;" id="add_data"><i class="fas fa-plus-circle"></i> Tambah</button>
-              <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px">
+            <div class="row">
+              <div class="col-1">
+                <button class="btn btn-sm btn-info" style="margin-bottom: 10px;" id="add_data"><i class="fas fa-plus-circle"></i> Tambah</button>
+            
+              </div>
+              <div class="col-3">
+                <select class="form-control" name="src_jenis">
+                  <option value="">All</option>
+                  <option value="BARANG JADI">BARANG JADI</option>
+                  <option value="BAHAN BAKU">BAHAN BAKU</option>
+                </select>
+              </div>
+            </div>
+            <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px">
                 <thead>
                 <tr>
                   <th>Kode</th>
                   <th>Kategori</th>
                   <th>Barang</th>
+                  <th>Jenis</th>
                   <th>Keterangan</th>
                   <th>Harga Beli</th>
                   <th>Harga Jual</th>
@@ -67,16 +80,27 @@
                       <option value="lemari">Lemari</option>
                       <option value="kursi">Kursi</option>
                       <option value="meja">Meja</option>
+                      <option value="lain-lain">Lain-lain</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                   <div class="form-group">
                     <label>Nama Barang</label>
                     <input type="text" class="form-control" name="nm_barang">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Jenis Barang</label>
+                    <select class="form-control" name="jenis">
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="BARANG JADI">BARANG JADI</option>
+                      <option value="BAHAN BAKU">BAHAN BAKU</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -152,6 +176,10 @@
     
     REFRESH_DATA()
 
+    $("[name='src_jenis']").change(function(){
+      REFRESH_DATA()
+    })
+
     $("#add_data").click(function(){
       $("#FRM_DATA")[0].reset()
       $("[name='foto_lowongan']").val('')
@@ -204,12 +232,16 @@
       "responsive": true,
       "ajax": {
           "url": "<?php echo site_url('barang/getAllData') ?>",
-          "type": "GET"
+          "type": "POST",
+          "data": {
+            "jenis" : $("[name='src_jenis']").val()
+          }
       },
       "columns": [
           { "data": "id_barang" },
           { "data": "kategori_barang"},
           { "data": "nm_barang"},
+          { "data": "jenis"},
           { "data": "ket_barang"},
           { "data": "harga_beli"},
           { "data": "harga_jual"},
@@ -280,6 +312,7 @@
     $("[name='ket_barang']").val(data.ket_barang)
     $("[name='nm_barang']").val(data.nm_barang)
     $("[name='stok']").val(data.stok)
+    $("[name='jenis']").val(data.jenis)
     $("[name='harga_beli']").val(data.harga_beli.replaceAll(".",""))
     $("[name='harga_jual']").val(data.harga_jual.replaceAll(".",""))
     $("#modal_add").modal('show')
