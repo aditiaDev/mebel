@@ -18,8 +18,13 @@ class Barang extends CI_Controller {
 
   public function getAllData(){
 
-    // $dataList = $this->db->get('tb_barang')->result();
-    $dataList = $this->db->query("select * from tb_barang where jenis like '%".$this->input->post('jenis')."%'")->result();
+    // 
+    if ($this->input->post('jenis') <> "") {
+      $dataList = $this->db->query("select * from tb_barang where jenis like '%".$this->input->post('jenis')."%'")->result();
+    }else{
+      $dataList = $this->db->get('tb_barang')->result();
+    }
+    
 
     $no = 0;
     $data['data'] = [];
