@@ -53,9 +53,10 @@ class Login extends CI_Controller {
     $this->form_validation->set_rules('nm_pelanggan', 'Nama', 'required');
     $this->form_validation->set_rules('alamat', 'Alamat', 'required');
     $this->form_validation->set_rules('no_tlp', 'No Telphone', 'required|numeric');
+    $this->form_validation->set_rules('no_tlp', 'No Telphone', 'required|numeric');
 
     $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_user.username]');
-    $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+    $this->form_validation->set_rules('username_telegram', 'username Telegram', 'required');
 
     if($this->form_validation->run() == FALSE){
       // echo validation_errors();
@@ -81,6 +82,7 @@ class Login extends CI_Controller {
               "nm_pelanggan" => $this->input->post('nm_pelanggan'),
               "no_tlp" => $this->input->post('no_tlp'),
               "alamat" => $this->input->post('alamat'),
+              "username_telegram" => $this->input->post('username_telegram'),
               "id_user" => $id_user,
             );
     $this->db->insert('tb_pelanggan', $data);

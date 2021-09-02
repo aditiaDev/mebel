@@ -40,6 +40,14 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Username Telegram</label>
+              <input type="text" class="form-control" name="username_telegram" >
+            </div>
+          </div>
+        </div>
         <div class="form-group">
           <label>Alamat</label>
           <textarea name="alamat" class="form-control"></textarea>

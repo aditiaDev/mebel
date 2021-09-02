@@ -82,6 +82,8 @@ class Chart extends CI_Controller {
       $this->db->delete('tb_tmp_penjualan');
       // Delete data di tabel temporary penjualan
 
+      $this->TelegramNotif($kode);
+
     }
 
     $this->db->insert_batch('tb_det_penjualan', $dataDtl);
@@ -125,6 +127,12 @@ class Chart extends CI_Controller {
     $updates = json_decode($updates, true);
     $pesan = $updates['message']['text'];
     $chat_id = $updates['message']['chat']['id'];
+    $username = $updates['message']['from']['username'];
+
+    // var_dump($updates);
+    // echo $username;
+
+    $this->db->query("UPDATE tb_pelanggan set chat_id='".$chat_id."'  WHERE username_telegram like '%".$username."%'");
 
     $pesan = strtoupper($pesan);
 
@@ -173,5 +181,35 @@ class Chart extends CI_Controller {
       
     if($err<>"") echo "Error: $err";
     else echo "Pesan Terkirim";
+  }
+
+  private function TelegramNotif($id_transaksi){
+    $token = "bot"."1859069479:AAFiaP2Ceot3tU6g9iM5n-kCfideseIxJhM";
+    
+    $chat_id = $this->db->query("SELECT chat_id FROM tb_pelanggan where id_user='".$this->session->userdata('id_user')."'")->row()->chat_id;
+
+
+    $pesan_balik="Pesanan anda sedang diproses dengan no Transaksi ".$id_transaksi;
+
+    $url = "https://api.telegram.org/$token/sendMessage?parse_mode=markdown&chat_id=$chat_id&text=$pesan_balik";
+
+    $ch = curl_init();
+
+
+      $optArray = array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CAINFO => "C:\cacert.pem"	
+      );
+    
+      
+    curl_setopt_array($ch, $optArray);
+    $result = curl_exec($ch);
+      
+    $err = curl_error($ch);
+    curl_close($ch);	
+      
+    // if($err<>"") echo "Error: $err";
+    // else echo "Pesan Terkirim";
   }
 }
