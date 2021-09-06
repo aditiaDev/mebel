@@ -38,10 +38,30 @@ class Barang extends CI_Controller {
       $data['data'][$no]['harga_beli'] = number_format($list->harga_beli,0,',','.');
       $data['data'][$no]['harga_jual'] = number_format($list->harga_jual,0,',','.');
       $data['data'][$no]['stok'] = number_format($list->stok,0,',','.');
+      $data['data'][$no]['minimum_stok'] = number_format($list->minimum_stok,0,',','.');
       $data['data'][$no]['foto'] = $list->foto;
       $no++;
     }
   	echo json_encode($data);
+  } 
+
+  public function getByMinStok(){
+
+    $dataList = $this->db->query("select * from tb_barang 
+                            where jenis like '%".$this->input->post('jenis')."%' 
+                            AND stok<=minimum_stok")->result();
+  
+    $no = 0;
+    $data['data'] = [];
+    foreach ($dataList as $list) {
+      $row = array();
+      $data['data'][$no]['id_barang'] = $list->id_barang;
+      $data['data'][$no]['nm_barang'] = $list->nm_barang;
+      $data['data'][$no]['stok'] = number_format($list->stok,0,',','.');
+      $data['data'][$no]['minimum_stok'] = number_format($list->minimum_stok,0,',','.');
+      $no++;
+    }
+    echo json_encode($data);
   } 
 
   public function generateIdBarang(){
@@ -95,6 +115,7 @@ class Barang extends CI_Controller {
     $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
     $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
     $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+    $this->form_validation->set_rules('minimum_stok', 'Minimum Stok', 'required|numeric');
 
     if($this->form_validation->run() == FALSE){
       // echo validation_errors();
@@ -111,6 +132,7 @@ class Barang extends CI_Controller {
               "harga_beli" => $this->input->post('harga_beli'),
               "harga_jual" => $this->input->post('harga_jual'),
               "stok" => $this->input->post('stok'),
+              "minimum_stok" => $this->input->post('minimum_stok'),
               "jenis" => $this->input->post('jenis'),
             );
 
@@ -153,6 +175,7 @@ class Barang extends CI_Controller {
     $this->form_validation->set_rules('harga_beli', 'Harga Beli', 'required|numeric');
     $this->form_validation->set_rules('harga_jual', 'Harga Jual', 'required|numeric');
     $this->form_validation->set_rules('stok', 'Stok', 'required|numeric');
+    $this->form_validation->set_rules('minimum_stok', 'Minimum Stok', 'required|numeric');
 
     if($this->form_validation->run() == FALSE){
       // echo validation_errors();
@@ -169,6 +192,7 @@ class Barang extends CI_Controller {
       "harga_beli" => $this->input->post('harga_beli'),
       "harga_jual" => $this->input->post('harga_jual'),
       "stok" => $this->input->post('stok'),
+      "minimum_stok" => $this->input->post('minimum_stok'),
       "jenis" => $this->input->post('jenis'),
     );
 

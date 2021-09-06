@@ -26,25 +26,28 @@
                 </select>
               </div>
             </div>
-            <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px">
-                <thead>
-                <tr>
-                  <th>Kode</th>
-                  <th>Kategori</th>
-                  <th>Barang</th>
-                  <th>Jenis</th>
-                  <th>Keterangan</th>
-                  <th>Harga Beli</th>
-                  <th>Harga Jual</th>
-                  <th>Stok</th>
-                  <th>Foto</th>
-                  <th style="width:140px;">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                </tbody>
-              </table>
+              <div style="position: relative;height: 700px;overflow: auto;display: block;">
+                <table id="tb_data" class="table table-bordered table-hover" style="font-size: 12px;width: 1200px;">
+                  <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Kategori</th>
+                    <th>Barang</th>
+                    <th>Jenis</th>
+                    <th>Keterangan</th>
+                    <th>Harga Beli</th>
+                    <th>Harga Jual</th>
+                    <th>Stok</th>
+                    <th>Min. Stok</th>
+                    <th>Foto</th>
+                    <th style="width:140px;">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  
+                  </tbody>
+                </table>
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -146,6 +149,15 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Minimum Stok</label>
+                    <input type="text" class="form-control" name="minimum_stok">
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -237,6 +249,15 @@
             "jenis" : $("[name='src_jenis']").val()
           }
       },
+      "createdRow": function( row, data, dataIndex){
+                if( parseInt(data.stok) <= parseInt(data.minimum_stok)){
+                  console.log(data.stok)
+                  console.log(data.minimum_stok)
+                    $(row).css({"background-color":"yellow"});
+                    // $(row).addClass('sub-needed');
+                }
+                // console.log(data.stok)
+            },
       "columns": [
           { "data": "id_barang" },
           { "data": "kategori_barang"},
@@ -245,7 +266,8 @@
           { "data": "ket_barang"},
           { "data": "harga_beli"},
           { "data": "harga_jual"},
-          { "data": "stok"},
+          { "data": "stok", },
+          { "data": "minimum_stok"},
           { "data": "foto",
             render: function (data, type, row, meta) {
                 if(data){
@@ -312,6 +334,7 @@
     $("[name='ket_barang']").val(data.ket_barang)
     $("[name='nm_barang']").val(data.nm_barang)
     $("[name='stok']").val(data.stok)
+    $("[name='minimum_stok']").val(data.minimum_stok)
     $("[name='jenis']").val(data.jenis)
     $("[name='harga_beli']").val(data.harga_beli.replaceAll(".",""))
     $("[name='harga_jual']").val(data.harga_jual.replaceAll(".",""))

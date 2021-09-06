@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Sep 2021 pada 16.41
--- Versi server: 10.4.10-MariaDB
--- Versi PHP: 7.3.12
+-- Generation Time: Sep 06, 2021 at 10:32 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,43 +25,46 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_barang`
+-- Table structure for table `tb_barang`
 --
 
 CREATE TABLE `tb_barang` (
   `id_barang` varchar(20) NOT NULL,
   `kategori_barang` enum('lemari','kursi','meja','lain-lain') DEFAULT NULL,
-  `ket_barang` text DEFAULT NULL,
+  `ket_barang` text,
   `harga_beli` float DEFAULT NULL,
   `harga_jual` float DEFAULT NULL,
   `stok` int(11) DEFAULT NULL,
   `foto` varchar(50) DEFAULT NULL,
   `nm_barang` varchar(255) DEFAULT NULL,
-  `jenis` enum('BARANG JADI','BAHAN BAKU') NOT NULL
+  `jenis` enum('BARANG JADI','BAHAN BAKU') NOT NULL,
+  `minimum_stok` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_barang`
+-- Dumping data for table `tb_barang`
 --
 
-INSERT INTO `tb_barang` (`id_barang`, `kategori_barang`, `ket_barang`, `harga_beli`, `harga_jual`, `stok`, `foto`, `nm_barang`, `jenis`) VALUES
-('KUR000001', 'kursi', 'Kursi kayu sekolah pohon mahoni', 300000, 350000, 25, '1626161747823.jpg', 'Kursi kayu sekolah pohon mahoni', 'BARANG JADI'),
-('KUR000002', 'kursi', 'Deskripsi\r\nLebar 30\r\nTinggi 75\r\n\r\nJamin harga termurah kualitas ga murahan !!!\r\n\r\nReady stok !\r\nKursi kayu jati belanda, kursi cafe,\r\nProduksi sendiri\r\nSudah finishing vernish natural', 150000, 180000, 27, '1626392832798.jpeg', 'Kursi kayu jati belanda', ''),
-('KUR000003', 'kursi', 'BANGKU SINGLE BUATAN JATI ASLI\r\nKUAT MULUS NYAMAN DAN MEWAH', 350000, 400000, 27, '1626392912071.jpg', 'Kursi kayu jati ukiran', ''),
-('KUR000004', 'kursi', 'Fitur Kursi Taman\r\nCocok di ruang Anda, sesuai dengan anggaran Anda\r\nKapasitas Tempat Duduk: 3\r\nTempat duduk yang dalam dan punggung yang tinggi dengan lengan untuk kenyamanan dan dukungan maksimal\r\nTahan Cuaca', 370000, 430000, 30, '1626392989819.jpg', 'Kursi kayu taman, kayu jati solid', ''),
-('LAI000001', 'lain-lain', 'Cat Plitur', 100000, 100000, 10, '1630538591116.jpg', 'Cat Plitur', 'BAHAN BAKU'),
-('LEM000001', 'lemari', 'Lemari kayu jati original full sampai belakang dan atas\r\n\r\nBahan: kayu jati muda\r\nUkuran (P x L x T) :  160 x 55 x 200 cm\r\nFinishing: pelitur', 500000, 650000, 31, 'lemari.jpg', 'Lemari 2 pintu + kaca', ''),
-('LEM000002', 'lemari', 'Kondisi Barang\r\nBARU\r\nSpesifikasi\r\nKategori	:	Lemari\r\nBerat	:	60 kilogram\r\nAsal Barang	:	Lokal\r\nDeskripsi\r\n*Info Kepada Kami Terlebih Dahulu Terkait Preoder &amp; Sistem Pengiriman bukalapak.\r\n\r\nKode: Raf-Lp-001\r\nUkuran : 110x60x220 cm\r\nBahan : Kayu Jati\r\nFinishing : Natural Melamik (Termasuk Finishing)\r\nHarga : Rp. 4.300.000 (Nego Hubungi Kami)\r\nOngkos Kirim: Belum termasuk Ongkos Kirim\r\nproses : 30 Hari (Tergantung Banyak Pemesanan)\r\n', 700000, 800000, 30, '1626393059183.jpg', 'Almari Lemari Pakaian Baju Pintu 2 Minimalis Gantung Kayu', ''),
-('LEM000003', 'lemari', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu', 500000, 580000, 30, '1626393135792.jpg', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu', ''),
-('LEM000004', 'lemari', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati\r\nLemari pakaian rahwana merupakan produk furniture jepara yang terbuat dari kayu jati berkualitas serta mempunyai kontruksi kuat dan kokoh.\r\n\r\nLemari baju rahwana di desain apik dengan 4 pintu serta ukiran cantik dan mempunyai sentuhan warna natural melamine, sehingga terlihat mewah dan elegan. Sangat bagus untuk pengisian perabot mebel di ruang tidur rumah anda.', 900000, 1200000, 30, '1626393952642.jpg', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati', ''),
-('MEJ000001', 'meja', 'Meja serbaguna yang dapat digunakan untuk belajar, laptop maupun komputer\r\nDilengkapi dengan knock down system\r\nMemiliki ukuran yang luas dan lebar yang menjadikan meja ini sangat nyaman digunakan selama bekerja dengan tampilan model yang modern untuk menjadikan ruangan selalu stylish dan trendy\r\nTerbuat dari bahan particle board yang tebal dan berkualitas tinggi, sehingga bebas dari rayap dan jamur', 300000, 350000, 30, '1626392242100.jpg', 'Meja Komputer', ''),
-('MEJ000002', 'meja', 'Meja kayu jati\r\nMaterial : Solid Wood\r\nCocok untuk diletakkan dalam segala suasana ruang\r\nDiameter : 90 cm\r\ntinggi : 75 cm\r\nUnit Utama', 200000, 230000, 30, '1626392321009.jpg', 'Meja Bundar', 'BARANG JADI'),
-('MEJ000003', 'meja', 'Spesifikasi :\r\nMaterial dari kayu jati asli grade A\r\nFinishing melamin warna natural sesuai gambar\r\nhasil finishing halus\r\nFormasi dudukan 4 kursi + meja\r\nPacking kardus tebal, rapi dan aman', 400000, 500000, 30, '1626392708738.jpg', 'Meja makan kayu set', 'BARANG JADI');
+INSERT INTO `tb_barang` (`id_barang`, `kategori_barang`, `ket_barang`, `harga_beli`, `harga_jual`, `stok`, `foto`, `nm_barang`, `jenis`, `minimum_stok`) VALUES
+('KUR000001', 'kursi', 'Kursi kayu sekolah pohon mahoni', 300000, 350000, 25, '1626161747823.jpg', 'Kursi kayu sekolah pohon mahoni', 'BARANG JADI', 30),
+('KUR000002', 'kursi', 'Deskripsi\r\nLebar 30\r\nTinggi 75\r\n\r\nJamin harga termurah kualitas ga murahan !!!\r\n\r\nReady stok !\r\nKursi kayu jati belanda, kursi cafe,\r\nProduksi sendiri\r\nSudah finishing vernish natural', 150000, 180000, 27, '1626392832798.jpeg', 'Kursi kayu jati belanda', 'BARANG JADI', 10),
+('KUR000003', 'kursi', 'BANGKU SINGLE BUATAN JATI ASLI\r\nKUAT MULUS NYAMAN DAN MEWAH', 350000, 400000, 27, '1626392912071.jpg', 'Kursi kayu jati ukiran', 'BARANG JADI', 30),
+('KUR000004', 'kursi', 'Fitur Kursi Taman\r\nCocok di ruang Anda, sesuai dengan anggaran Anda\r\nKapasitas Tempat Duduk: 3\r\nTempat duduk yang dalam dan punggung yang tinggi dengan lengan untuk kenyamanan dan dukungan maksimal\r\nTahan Cuaca', 370000, 430000, 30, '1626392989819.jpg', 'Kursi kayu taman, kayu jati solid', 'BARANG JADI', 0),
+('LAI000001', 'lain-lain', 'Cat Plitur', 100000, 100000, 10, '1630538591116.jpg', 'Cat Plitur', 'BAHAN BAKU', 0),
+('LAI000002', 'lain-lain', 'Cat Nippon Coklat', 40000, 40000, 5, NULL, 'Cat Coklat', 'BAHAN BAKU', 10),
+('LAI000003', 'lain-lain', 'Cat Putih', 40000, 40000, 10, NULL, 'Cat Putih', 'BAHAN BAKU', 10),
+('LEM000001', 'lemari', 'Lemari kayu jati original full sampai belakang dan atas\r\n\r\nBahan: kayu jati muda\r\nUkuran (P x L x T) :  160 x 55 x 200 cm\r\nFinishing: pelitur', 500000, 650000, 31, 'lemari.jpg', 'Lemari 2 pintu + kaca', 'BARANG JADI', 0),
+('LEM000002', 'lemari', 'Kondisi Barang\r\nBARU\r\nSpesifikasi\r\nKategori	:	Lemari\r\nBerat	:	60 kilogram\r\nAsal Barang	:	Lokal\r\nDeskripsi\r\n*Info Kepada Kami Terlebih Dahulu Terkait Preoder &amp; Sistem Pengiriman bukalapak.\r\n\r\nKode: Raf-Lp-001\r\nUkuran : 110x60x220 cm\r\nBahan : Kayu Jati\r\nFinishing : Natural Melamik (Termasuk Finishing)\r\nHarga : Rp. 4.300.000 (Nego Hubungi Kami)\r\nOngkos Kirim: Belum termasuk Ongkos Kirim\r\nproses : 30 Hari (Tergantung Banyak Pemesanan)\r\n', 700000, 800000, 30, '1626393059183.jpg', 'Almari Lemari Pakaian Baju Pintu 2 Minimalis Gantung Kayu', 'BARANG JADI', 0),
+('LEM000003', 'lemari', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu', 500000, 580000, 30, '1626393135792.jpg', 'Lemari Pakaian Kayu Murah | Lemari Pakaian Minimalis Kayu', 'BARANG JADI', 0),
+('LEM000004', 'lemari', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati\r\nLemari pakaian rahwana merupakan produk furniture jepara yang terbuat dari kayu jati berkualitas serta mempunyai kontruksi kuat dan kokoh.\r\n\r\nLemari baju rahwana di desain apik dengan 4 pintu serta ukiran cantik dan mempunyai sentuhan warna natural melamine, sehingga terlihat mewah dan elegan. Sangat bagus untuk pengisian perabot mebel di ruang tidur rumah anda.', 900000, 1200000, 30, '1626393952642.jpg', 'Lemari Pakaian Rahwana 4 Pintu Ukiran Kayu Jati', 'BARANG JADI', 0),
+('MEJ000001', 'meja', 'Meja serbaguna yang dapat digunakan untuk belajar, laptop maupun komputer\r\nDilengkapi dengan knock down system\r\nMemiliki ukuran yang luas dan lebar yang menjadikan meja ini sangat nyaman digunakan selama bekerja dengan tampilan model yang modern untuk menjadikan ruangan selalu stylish dan trendy\r\nTerbuat dari bahan particle board yang tebal dan berkualitas tinggi, sehingga bebas dari rayap dan jamur', 300000, 350000, 30, '1626392242100.jpg', 'Meja Komputer', 'BARANG JADI', 0),
+('MEJ000002', 'meja', 'Meja kayu jati\r\nMaterial : Solid Wood\r\nCocok untuk diletakkan dalam segala suasana ruang\r\nDiameter : 90 cm\r\ntinggi : 75 cm\r\nUnit Utama', 200000, 230000, 30, '1626392321009.jpg', 'Meja Bundar', 'BARANG JADI', 0),
+('MEJ000003', 'meja', 'Spesifikasi :\r\nMaterial dari kayu jati asli grade A\r\nFinishing melamin warna natural sesuai gambar\r\nhasil finishing halus\r\nFormasi dudukan 4 kursi + meja\r\nPacking kardus tebal, rapi dan aman', 400000, 500000, 30, '1626392708738.jpg', 'Meja makan kayu set', 'BARANG JADI', 10);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_det_pembelian`
+-- Table structure for table `tb_det_pembelian`
 --
 
 CREATE TABLE `tb_det_pembelian` (
@@ -73,7 +76,7 @@ CREATE TABLE `tb_det_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_det_pembelian`
+-- Dumping data for table `tb_det_pembelian`
 --
 
 INSERT INTO `tb_det_pembelian` (`id_det_pembelian`, `id_pembelian`, `id_barang`, `qty_beli`, `harga`) VALUES
@@ -95,7 +98,7 @@ INSERT INTO `tb_det_pembelian` (`id_det_pembelian`, `id_pembelian`, `id_barang`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_det_penjualan`
+-- Table structure for table `tb_det_penjualan`
 --
 
 CREATE TABLE `tb_det_penjualan` (
@@ -109,7 +112,7 @@ CREATE TABLE `tb_det_penjualan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_det_penjualan`
+-- Dumping data for table `tb_det_penjualan`
 --
 
 INSERT INTO `tb_det_penjualan` (`id_det_penjualan`, `id_penjualan`, `id_barang`, `jumlah`, `harga`, `status_barang`, `finishing`) VALUES
@@ -131,7 +134,7 @@ INSERT INTO `tb_det_penjualan` (`id_det_penjualan`, `id_penjualan`, `id_barang`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jurnal_keuangan`
+-- Table structure for table `tb_jurnal_keuangan`
 --
 
 CREATE TABLE `tb_jurnal_keuangan` (
@@ -143,7 +146,7 @@ CREATE TABLE `tb_jurnal_keuangan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jurnal_keuangan`
+-- Dumping data for table `tb_jurnal_keuangan`
 --
 
 INSERT INTO `tb_jurnal_keuangan` (`id_jurnal_uang`, `tgl_input`, `id_relasi`, `masuk`, `keluar`) VALUES
@@ -163,7 +166,7 @@ INSERT INTO `tb_jurnal_keuangan` (`id_jurnal_uang`, `tgl_input`, `id_relasi`, `m
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_jurnal_stok`
+-- Table structure for table `tb_jurnal_stok`
 --
 
 CREATE TABLE `tb_jurnal_stok` (
@@ -175,7 +178,7 @@ CREATE TABLE `tb_jurnal_stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_jurnal_stok`
+-- Dumping data for table `tb_jurnal_stok`
 --
 
 INSERT INTO `tb_jurnal_stok` (`id_jurnal_stok`, `tgl_input`, `id_relasi`, `masuk`, `keluar`) VALUES
@@ -191,18 +194,18 @@ INSERT INTO `tb_jurnal_stok` (`id_jurnal_stok`, `tgl_input`, `id_relasi`, `masuk
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_keterangan_pembelian`
+-- Table structure for table `tb_keterangan_pembelian`
 --
 
 CREATE TABLE `tb_keterangan_pembelian` (
   `id_ket_pembelian` int(11) NOT NULL,
   `id_pembelian` varchar(20) DEFAULT NULL,
   `tgl_input` datetime DEFAULT NULL,
-  `penjelasan` text DEFAULT NULL
+  `penjelasan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_keterangan_pembelian`
+-- Dumping data for table `tb_keterangan_pembelian`
 --
 
 INSERT INTO `tb_keterangan_pembelian` (`id_ket_pembelian`, `id_pembelian`, `tgl_input`, `penjelasan`) VALUES
@@ -214,21 +217,21 @@ INSERT INTO `tb_keterangan_pembelian` (`id_ket_pembelian`, `id_pembelian`, `tgl_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pelanggan`
+-- Table structure for table `tb_pelanggan`
 --
 
 CREATE TABLE `tb_pelanggan` (
   `id_pelanggan` int(11) NOT NULL,
   `nm_pelanggan` varchar(50) DEFAULT NULL,
   `no_tlp` varchar(13) DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
+  `alamat` text,
   `id_user` int(11) DEFAULT NULL,
   `username_telegram` varchar(30) DEFAULT NULL,
   `chat_id` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pelanggan`
+-- Dumping data for table `tb_pelanggan`
 --
 
 INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nm_pelanggan`, `no_tlp`, `alamat`, `id_user`, `username_telegram`, `chat_id`) VALUES
@@ -241,7 +244,7 @@ INSERT INTO `tb_pelanggan` (`id_pelanggan`, `nm_pelanggan`, `no_tlp`, `alamat`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pemasukan`
+-- Table structure for table `tb_pemasukan`
 --
 
 CREATE TABLE `tb_pemasukan` (
@@ -251,11 +254,11 @@ CREATE TABLE `tb_pemasukan` (
   `tgl_input` datetime DEFAULT NULL,
   `tipe_pemasukan` enum('penjualan','non penjualan') DEFAULT NULL,
   `nominal_masuk` float DEFAULT NULL,
-  `keterangan` text DEFAULT NULL
+  `keterangan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pemasukan`
+-- Dumping data for table `tb_pemasukan`
 --
 
 INSERT INTO `tb_pemasukan` (`id_pemasukan`, `id_pelanggan`, `id_relasi`, `tgl_input`, `tipe_pemasukan`, `nominal_masuk`, `keterangan`) VALUES
@@ -269,7 +272,7 @@ INSERT INTO `tb_pemasukan` (`id_pemasukan`, `id_pelanggan`, `id_relasi`, `tgl_in
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pembelian`
+-- Table structure for table `tb_pembelian`
 --
 
 CREATE TABLE `tb_pembelian` (
@@ -281,7 +284,7 @@ CREATE TABLE `tb_pembelian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pembelian`
+-- Dumping data for table `tb_pembelian`
 --
 
 INSERT INTO `tb_pembelian` (`id_pembelian`, `tgl_pembelian`, `id_supplier`, `status_pembelian`, `tot_pembelian`) VALUES
@@ -298,7 +301,7 @@ INSERT INTO `tb_pembelian` (`id_pembelian`, `tgl_pembelian`, `id_supplier`, `sta
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pengeluaran`
+-- Table structure for table `tb_pengeluaran`
 --
 
 CREATE TABLE `tb_pengeluaran` (
@@ -307,11 +310,11 @@ CREATE TABLE `tb_pengeluaran` (
   `tipe_pengeluaran` enum('pembelian','non pembelian') DEFAULT NULL,
   `id_relasi` varchar(25) DEFAULT NULL,
   `nominal_keluar` float DEFAULT NULL,
-  `keperluan` text DEFAULT NULL
+  `keperluan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pengeluaran`
+-- Dumping data for table `tb_pengeluaran`
 --
 
 INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `tgl_input`, `tipe_pengeluaran`, `id_relasi`, `nominal_keluar`, `keperluan`) VALUES
@@ -325,7 +328,7 @@ INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `tgl_input`, `tipe_pengeluaran`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_penjualan`
+-- Table structure for table `tb_penjualan`
 --
 
 CREATE TABLE `tb_penjualan` (
@@ -335,13 +338,13 @@ CREATE TABLE `tb_penjualan` (
   `no_nota` varchar(30) DEFAULT NULL,
   `tot_penjualan` float DEFAULT NULL,
   `status` enum('proses','kirim','selesai') DEFAULT NULL,
-  `ket_penjualan` text DEFAULT NULL,
+  `ket_penjualan` text,
   `id_pelanggan` int(11) DEFAULT NULL,
-  `alamat_pengiriman` text DEFAULT NULL
+  `alamat_pengiriman` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_penjualan`
+-- Dumping data for table `tb_penjualan`
 --
 
 INSERT INTO `tb_penjualan` (`id_penjualan`, `tgl_jual`, `tgl_nota`, `no_nota`, `tot_penjualan`, `status`, `ket_penjualan`, `id_pelanggan`, `alamat_pengiriman`) VALUES
@@ -362,18 +365,18 @@ INSERT INTO `tb_penjualan` (`id_penjualan`, `tgl_jual`, `tgl_nota`, `no_nota`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_supplier`
+-- Table structure for table `tb_supplier`
 --
 
 CREATE TABLE `tb_supplier` (
   `id_supplier` int(11) NOT NULL,
   `nm_supplier` varchar(50) DEFAULT NULL,
   `no_tlp` varchar(13) DEFAULT NULL,
-  `alamat` text DEFAULT NULL
+  `alamat` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_supplier`
+-- Dumping data for table `tb_supplier`
 --
 
 INSERT INTO `tb_supplier` (`id_supplier`, `nm_supplier`, `no_tlp`, `alamat`) VALUES
@@ -382,7 +385,7 @@ INSERT INTO `tb_supplier` (`id_supplier`, `nm_supplier`, `no_tlp`, `alamat`) VAL
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_tmp_pembelian`
+-- Table structure for table `tb_tmp_pembelian`
 --
 
 CREATE TABLE `tb_tmp_pembelian` (
@@ -394,7 +397,7 @@ CREATE TABLE `tb_tmp_pembelian` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_tmp_penjualan`
+-- Table structure for table `tb_tmp_penjualan`
 --
 
 CREATE TABLE `tb_tmp_penjualan` (
@@ -407,7 +410,7 @@ CREATE TABLE `tb_tmp_penjualan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -418,7 +421,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_user`
+-- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`) VALUES
@@ -435,13 +438,13 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`) VALUES
 --
 
 --
--- Indeks untuk tabel `tb_barang`
+-- Indexes for table `tb_barang`
 --
 ALTER TABLE `tb_barang`
   ADD PRIMARY KEY (`id_barang`);
 
 --
--- Indeks untuk tabel `tb_det_pembelian`
+-- Indexes for table `tb_det_pembelian`
 --
 ALTER TABLE `tb_det_pembelian`
   ADD PRIMARY KEY (`id_det_pembelian`),
@@ -449,42 +452,42 @@ ALTER TABLE `tb_det_pembelian`
   ADD KEY `FK_det_pembelian_2` (`id_barang`);
 
 --
--- Indeks untuk tabel `tb_det_penjualan`
+-- Indexes for table `tb_det_penjualan`
 --
 ALTER TABLE `tb_det_penjualan`
   ADD PRIMARY KEY (`id_det_penjualan`),
   ADD KEY `FK_DET_PENJUALAN_1` (`id_penjualan`);
 
 --
--- Indeks untuk tabel `tb_jurnal_keuangan`
+-- Indexes for table `tb_jurnal_keuangan`
 --
 ALTER TABLE `tb_jurnal_keuangan`
   ADD PRIMARY KEY (`id_jurnal_uang`),
   ADD KEY `FK_KEUANGAN_2` (`id_relasi`);
 
 --
--- Indeks untuk tabel `tb_jurnal_stok`
+-- Indexes for table `tb_jurnal_stok`
 --
 ALTER TABLE `tb_jurnal_stok`
   ADD PRIMARY KEY (`id_jurnal_stok`),
   ADD KEY `FK_STOCK_2` (`id_relasi`);
 
 --
--- Indeks untuk tabel `tb_keterangan_pembelian`
+-- Indexes for table `tb_keterangan_pembelian`
 --
 ALTER TABLE `tb_keterangan_pembelian`
   ADD PRIMARY KEY (`id_ket_pembelian`),
   ADD KEY `FK_KET_PEMBELIAN_1` (`id_pembelian`);
 
 --
--- Indeks untuk tabel `tb_pelanggan`
+-- Indexes for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`),
   ADD KEY `FK_PELANGGAN_1` (`id_user`);
 
 --
--- Indeks untuk tabel `tb_pemasukan`
+-- Indexes for table `tb_pemasukan`
 --
 ALTER TABLE `tb_pemasukan`
   ADD PRIMARY KEY (`id_pemasukan`),
@@ -492,128 +495,128 @@ ALTER TABLE `tb_pemasukan`
   ADD KEY `FK_PEMASUKAN_2` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `tb_pembelian`
+-- Indexes for table `tb_pembelian`
 --
 ALTER TABLE `tb_pembelian`
   ADD PRIMARY KEY (`id_pembelian`),
   ADD KEY `FK_PEMBELIAN_1` (`id_supplier`);
 
 --
--- Indeks untuk tabel `tb_pengeluaran`
+-- Indexes for table `tb_pengeluaran`
 --
 ALTER TABLE `tb_pengeluaran`
   ADD PRIMARY KEY (`id_pengeluaran`),
   ADD KEY `FK_PENGELUARAN` (`id_relasi`);
 
 --
--- Indeks untuk tabel `tb_penjualan`
+-- Indexes for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   ADD PRIMARY KEY (`id_penjualan`),
   ADD KEY `FK_PENJUALAN_1` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `tb_supplier`
+-- Indexes for table `tb_supplier`
 --
 ALTER TABLE `tb_supplier`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indeks untuk tabel `tb_user`
+-- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_det_pembelian`
+-- AUTO_INCREMENT for table `tb_det_pembelian`
 --
 ALTER TABLE `tb_det_pembelian`
   MODIFY `id_det_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_det_penjualan`
+-- AUTO_INCREMENT for table `tb_det_penjualan`
 --
 ALTER TABLE `tb_det_penjualan`
   MODIFY `id_det_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_keterangan_pembelian`
+-- AUTO_INCREMENT for table `tb_keterangan_pembelian`
 --
 ALTER TABLE `tb_keterangan_pembelian`
   MODIFY `id_ket_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pelanggan`
+-- AUTO_INCREMENT for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_supplier`
+-- AUTO_INCREMENT for table `tb_supplier`
 --
 ALTER TABLE `tb_supplier`
   MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_user`
+-- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tb_det_pembelian`
+-- Constraints for table `tb_det_pembelian`
 --
 ALTER TABLE `tb_det_pembelian`
   ADD CONSTRAINT `FK_det_pembelian_1` FOREIGN KEY (`id_pembelian`) REFERENCES `tb_pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_det_pembelian_2` FOREIGN KEY (`id_barang`) REFERENCES `tb_barang` (`id_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_det_penjualan`
+-- Constraints for table `tb_det_penjualan`
 --
 ALTER TABLE `tb_det_penjualan`
   ADD CONSTRAINT `FK_DET_PENJUALAN_1` FOREIGN KEY (`id_penjualan`) REFERENCES `tb_penjualan` (`id_penjualan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_keterangan_pembelian`
+-- Constraints for table `tb_keterangan_pembelian`
 --
 ALTER TABLE `tb_keterangan_pembelian`
   ADD CONSTRAINT `FK_KET_PEMBELIAN_1` FOREIGN KEY (`id_pembelian`) REFERENCES `tb_pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_pelanggan`
+-- Constraints for table `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
   ADD CONSTRAINT `FK_PELANGGAN_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_pemasukan`
+-- Constraints for table `tb_pemasukan`
 --
 ALTER TABLE `tb_pemasukan`
   ADD CONSTRAINT `FK_PEMASUKAN_1` FOREIGN KEY (`id_relasi`) REFERENCES `tb_penjualan` (`id_penjualan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_PEMASUKAN_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_pembelian`
+-- Constraints for table `tb_pembelian`
 --
 ALTER TABLE `tb_pembelian`
   ADD CONSTRAINT `FK_PEMBELIAN_1` FOREIGN KEY (`id_supplier`) REFERENCES `tb_supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_pengeluaran`
+-- Constraints for table `tb_pengeluaran`
 --
 ALTER TABLE `tb_pengeluaran`
   ADD CONSTRAINT `FK_PENGELUARAN` FOREIGN KEY (`id_relasi`) REFERENCES `tb_pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tb_penjualan`
+-- Constraints for table `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
   ADD CONSTRAINT `FK_PENJUALAN_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `tb_pelanggan` (`id_pelanggan`) ON DELETE CASCADE ON UPDATE CASCADE;
